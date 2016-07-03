@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\icon.png",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\icon.png"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_tab_use_enabled.png",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\ic_tab_use_enabled.png"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_tab_host.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\ic_tab_host.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_tab_use_disabled.png",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\ic_tab_use_disabled.png"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_tab_host_enabled.png",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\ic_tab_host_enabled.png"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_tab_use.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\ic_tab_use.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_tab_host_disabled.png",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\drawable\\ic_tab_host_disabled.png"
+    }
+]

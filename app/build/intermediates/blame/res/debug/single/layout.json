@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\usejoindialog.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\usejoindialog.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\hostnamedialog.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\hostnamedialog.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\hoststartdialog.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\hoststartdialog.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\host.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\host.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\use.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\use.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\useleavedialog.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\useleavedialog.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\hoststopdialog.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\hoststopdialog.xml"
+    },
+    {
+        "merged": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\layout\\alljoynerrordialog.xml",
+        "source": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\layout\\alljoynerrordialog.xml"
+    }
+]
