@@ -1,22 +1,34 @@
 package org.alljoyn.bus.sample.chat;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
+
+    private static String LOG_TAG = "DataBaseHelper";
 
     //The Android's default system path of your application database.
     private static String DB_PATH = "/data/data/org.alljoyn.bus.sample.chat/databases/";
 
-    private static String DB_NAME = "Questions";
+    private static String DB_NAME = "Questions.sqlite";
+
+    private static String TABLE_NAME = "Questions";
 
     private SQLiteDatabase myDataBase;
 
@@ -146,6 +158,49 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public void getQuestionsCount() {
+        String countQuery = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        Log.d(LOG_TAG, "Anzahl Fragen: " + cursor.getCount());
+        cursor.close();
+        // return count
+        //return cursor.getCount();
+    }
+
+    public List<String> getQuestions(){
+        List<String> questions = new ArrayList<String>();
+        List<String> total = new ArrayList<String>();
+
+        String priorityQuery = "SELECT Questions FROM " + TABLE_NAME + " ORDER BY Priority DESC LIMIT 3";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(priorityQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                questions.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+
+        String totalQuery = "SELECT Questions FROM " + TABLE_NAME;
+        Cursor cursor1 = db.rawQuery(totalQuery, null);
+
+        if (cursor1.moveToFirst()) {
+            do {
+                total.add(cursor1.getString(0));
+            } while (cursor1.moveToNext());
+        }
+
+        Random rand = new Random();
+        int x = rand.nextInt(total.size());
+        int y = rand.nextInt(total.size());
+
+        questions.add(total.get(x));
+        questions.add(total.get(y));
+
+        return questions;
     }
 
     // Add your public helper methods to access and get content from the database.

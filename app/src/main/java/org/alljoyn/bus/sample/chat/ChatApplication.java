@@ -109,7 +109,21 @@ public class ChatApplication extends Application implements Observable {
             throw new Error("Unable to create database");
 
         }
+
+        try {
+
+            myDbHelper.openDataBase();
+
+        }catch(SQLException sqle){
+
+            throw sqle;
+
+        }
+
+        myDbHelper.getQuestionsCount();
+
     }
+
 
     ComponentName mRunningService = null;
 
@@ -148,15 +162,7 @@ public class ChatApplication extends Application implements Observable {
             if (mRunningService == null) {
                 Log.i(TAG, "checkin(): failed to startService()");
             }
-            try {
 
-                myDbHelper.openDataBase();
-
-            }catch(SQLException sqle){
-
-                throw sqle;
-
-            }
 
         }
     }

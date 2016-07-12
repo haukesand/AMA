@@ -34,7 +34,7 @@
         <activity
             android:name="org.alljoyn.bus.sample.chat.UseActivity"
             android:label="AllJoyn Chat Channel Usage"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="adjustPan" >
         </activity>
 
         <service android:name="org.alljoyn.bus.sample.chat.AllJoynService" >

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- When selected, use grey -->
-    <item android:drawable="@drawable/ic_tab_use_enabled"
+    <item android:drawable="@drawable/ic_question_answer_white_24dp"
+    />
           android:state_selected="true" />
     <!-- When not selected, use white-->
-    <item android:drawable="@drawable/ic_tab_use_disabled" />
+    <item android:drawable="@drawable/ic_question_answer_white_24dp"
+   />
 </selector>

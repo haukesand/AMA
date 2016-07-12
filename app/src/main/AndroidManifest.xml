@@ -33,7 +33,7 @@
 
         <activity
             android:name=".UseActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:label="AllJoyn Chat Channel Usage">
         </activity>
 
