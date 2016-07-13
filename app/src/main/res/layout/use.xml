@@ -10,118 +10,133 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/useMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Got a better question?"
+            android:imeOptions="actionDone" />
+
+
+        <RelativeLayout
+            android:id="@+id/channel_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:id="@+id/button_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
 
-            <EditText
-                android:id="@+id/useMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:hint="Got a better question?"
-                android:imeOptions="actionDone" />
 
-            <ScrollView
-                android:id="@+id/scrollView"
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/myRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <RadioGroup
-                    android:id="@+id/myRadioGroup"
+
+            </RadioGroup>
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/useHistoryList"
+                    android:layout_width="match_parent"
+                    android:layout_height="102dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#ff202020"
+                    android:divider="#ff505050"
+                    android:dividerHeight="1dp"
+                    android:transcriptMode="alwaysScroll" />
+
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <TableRow android:gravity="center">
 
-                </RadioGroup>
-            </ScrollView>
+                        <TextView android:text="Channel Name:  " />
 
-            <RelativeLayout
-                android:id="@+id/channel_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                android:layout_alignParentBottom="true"
+                        <TextView
+                            android:id="@+id/useChannelName"
+                            android:text="1234567890" />
+                    </TableRow>
+
+                    <TableRow android:gravity="center">
+
+                        <TextView android:text="Channel Status:  " />
+
+                        <TextView
+                            android:id="@+id/useChannelStatus"
+                            android:text="1234567890" />
+                    </TableRow>
+                </TableLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:orientation="vertical">
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <ListView
-                        android:id="@+id/useHistoryList"
-                        android:layout_width="match_parent"
-                        android:layout_height="102dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#ff202020"
-                        android:divider="#ff505050"
-                        android:dividerHeight="1dp"
-                        android:transcriptMode="alwaysScroll" />
-
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TableRow android:gravity="center">
-
-                            <TextView android:text="Channel Name:  " />
-
-                            <TextView
-                                android:id="@+id/useChannelName"
-                                android:text="1234567890" />
-                        </TableRow>
-
-                        <TableRow android:gravity="center">
-
-                            <TextView android:text="Channel Status:  " />
-
-                            <TextView
-                                android:id="@+id/useChannelStatus"
-                                android:text="1234567890" />
-                        </TableRow>
-                    </TableLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/useJoin"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:text="Join Channel" />
 
-                        <Button
-                            android:id="@+id/useJoin"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Join Channel" />
-
-                        <Button
-                            android:id="@+id/useLeave"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Leave Channel" />
-                    </LinearLayout>
+                    <Button
+                        android:id="@+id/useLeave"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Leave Channel" />
                 </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/brightBlue"
-            android:gravity="center"
-            android:orientation="vertical">
+    </LinearLayout>
 
-        </LinearLayout>
+<LinearLayout
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="@color/brightBlue"
+android:gravity="center"
+android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/red"
-            android:gravity="center"
-            android:orientation="vertical"></LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="@color/red"
+android:gravity="center"
+android:orientation="vertical"></LinearLayout>
 
     </ViewFlipper>
 
-</LinearLayout>
+    </LinearLayout>
