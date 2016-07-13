@@ -16,6 +16,7 @@
 
 package org.alljoyn.bus.sample.chat;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -82,6 +83,9 @@ public class UseActivity extends Activity implements Observer {
                     Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
                     mChatApplication.newLocalUserMessage(message);
                     view.setText("");
+                    Intent intent = new Intent(UseActivity.this, GameActivity.class);
+                    startActivity(intent);
+
                 }
                 return true;
             }
