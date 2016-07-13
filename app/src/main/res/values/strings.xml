@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AMA</string>
+    <color name="brightBlue">#d3fcf7</color>
+    <color name="red">#ec4446</color>
+
 </resources>

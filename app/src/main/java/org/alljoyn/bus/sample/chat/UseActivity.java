@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.Dialog;
 
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -39,19 +40,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import android.util.Log;
+import android.widget.ViewFlipper;
 
 import java.util.List;
 
 public class UseActivity extends Activity implements Observer {
     private static final String TAG = "chat.UseActivity";
     //for flashing
-    final static int INTERVAL = 1000; // 1 second
     private static View myView = null;
-    private static View channelView = null;
-    boolean whichColor = true;
+
 
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
-
+    private ViewFlipper viewFlipper;
+    private float lastX;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
@@ -60,21 +61,10 @@ public class UseActivity extends Activity implements Observer {
 
         //for flashing
         myView = (View) findViewById(R.id.my_view);
-        channelView = (View) findViewById(R.id.channel_view);
-        myView.setBackgroundColor(Color.RED);// set initial colour
-        new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(INTERVAL);
-                    }
-                    catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    flashScreen();
-                    whichColor = !whichColor;
-                }}
-        }).start();
+        viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
+        viewFlipper.setFlipInterval(5000);
+        viewFlipper.startFlipping();
+        //viewFlipper.setDisplayedChild(1); //0 is original, 1 is blue, 2 is red
 
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
@@ -214,21 +204,21 @@ public class UseActivity extends Activity implements Observer {
     }
 
 
-    private void flashScreen() {
-        //channelView.setVisibility(View.GONE);
-        hideSoftKeyboard();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (whichColor)
-                    myView.setBackgroundColor(Color.RED);
-                else
-                { myView.setBackgroundColor(Color.GREEN);
-
-                }
-            }
-        });
-    }
+//    private void flashScreen() {
+//        //channelView.setVisibility(View.GONE);
+//        hideSoftKeyboard();
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (whichColor)
+//                    myView.setBackgroundColor(Color.RED);
+//                else
+//                { myView.setBackgroundColor(Color.GREEN);
+//
+//                }
+//            }
+//        });
+//    }
     public void hideSoftKeyboard() {
         if(getCurrentFocus()!=null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
