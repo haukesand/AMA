@@ -29,13 +29,18 @@
         <activity
             android:name=".HostActivity"
             android:windowSoftInputMode="adjustResize"
-            android:label="AllJoyn Chat Channel Hosting">
+            android:label="Settings">
         </activity>
 
         <activity
             android:name=".UseActivity"
             android:windowSoftInputMode="adjustPan"
-            android:label="AllJoyn Chat Channel Usage">
+            android:label="Ask Me Anonymously">
+        </activity>
+
+        <activity
+            android:name=".GameActivity"
+            android:label="Have Fun!">
         </activity>
 
         <service
