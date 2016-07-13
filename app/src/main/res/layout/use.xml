@@ -15,26 +15,20 @@
         android:imeOptions="actionDone"
         />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/myRadioGroup">
-
-
-        </RadioGroup>
-    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/channel_view"
         >
-        android:layout_alignParentBottom="true"
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/button_view">
+        </LinearLayout>
+
 
         <LinearLayout
             android:orientation="vertical"

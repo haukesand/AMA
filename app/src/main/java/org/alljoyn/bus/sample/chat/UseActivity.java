@@ -33,9 +33,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import android.util.Log;
@@ -94,18 +96,18 @@ public class UseActivity extends Activity implements Observer {
             }
         });
 
-        //todo Radio Buttons
-
-        RadioGroup rGroup = (RadioGroup)findViewById(R.id.myRadioGroup);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.button_view);
         List<String> questions = myDbHelper.getQuestions();
-        RadioButton button;
+        Button button;
         int id = 0;
         for(String s : questions){
-            button = new RadioButton(this);
+            button = new Button(this);
             button.setText(s);
             button.setId(id);
+            //WindowManager.LayoutParams lParams = new WindowManager.LayoutParams(0, WindowManager.LayoutParams.WRAP_CONTENT);
+            //button.setLayoutParams(lParams);
             id++;
-            rGroup.addView(button);
+            layout.addView(button, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
 
