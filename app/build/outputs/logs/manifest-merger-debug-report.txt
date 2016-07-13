@@ -1,88 +1,88 @@
 -- Merging decision tree log ---
 manifest
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:2:1-46:12
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:2:1-46:12
 	package
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:3:5-42
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:3:5-42
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:5:5-36
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:5:5-36
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
 	android:versionCode
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:4:5-35
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:4:5-35
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:2:11-69
 uses-sdk
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:6:5-44
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:6:5-44
 	android:targetSdkVersion
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:6:15-41
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
-		INJECTED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:6:15-41
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:8:5-83
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:8:5-83
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:8:22-64
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:8:22-64
 uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:9:5-102
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:9:5-102
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:9:22-83
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:9:22-83
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:10:5-92
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:10:5-92
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:10:22-73
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:10:22-73
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:11:5-92
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:11:5-92
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:11:22-73
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:11:22-73
 application
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:13:5-45:19
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:13:5-45:19
 	android:label
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:15:9-41
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:15:9-41
 	android:icon
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:14:9-38
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:14:9-38
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:16:9-40
 activity#org.alljoyn.bus.sample.chat.TabWidget
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:18:9-27:20
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:18:9-27:20
 	android:label
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:20:13-45
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:20:13-45
 	android:theme
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:21:13-71
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:21:13-71
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:19:13-38
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:19:13-38
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:23:13-26:29
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:23:13-26:29
 action#android.intent.action.MAIN
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:24:17-69
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:24:17-69
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:24:25-66
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:24:25-66
 category#android.intent.category.LAUNCHER
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:25:17-77
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:25:17-77
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:25:27-74
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:25:27-74
 activity#org.alljoyn.bus.sample.chat.HostActivity
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:29:9-33:20
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:29:9-33:20
 	android:label
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:32:13-57
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:32:13-57
 	android:windowSoftInputMode
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:31:13-55
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:31:13-55
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:30:13-41
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:30:13-41
 activity#org.alljoyn.bus.sample.chat.UseActivity
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:35:9-39:20
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:35:9-39:20
 	android:label
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:38:13-55
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:38:13-55
 	android:windowSoftInputMode
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:37:13-52
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:37:13-52
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:36:13-40
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:36:13-40
 service#org.alljoyn.bus.sample.chat.AllJoynService
-ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:41:9-43:19
+ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:41:9-43:19
 	android:name
-		ADDED from K:\Users\hauke_000\Documents\AMA\app\src\main\AndroidManifest.xml:42:13-42
+		ADDED from /Users/Nana/Desktop/AMA/AMA/app/src/main/AndroidManifest.xml:42:13-42

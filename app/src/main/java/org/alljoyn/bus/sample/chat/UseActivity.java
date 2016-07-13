@@ -34,6 +34,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import android.util.Log;
@@ -47,6 +49,8 @@ public class UseActivity extends Activity implements Observer {
     private static View myView = null;
     private static View channelView = null;
     boolean whichColor = true;
+
+    DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,21 @@ public class UseActivity extends Activity implements Observer {
                 return true;
             }
         });
+
+        //todo Radio Buttons
+
+        RadioGroup rGroup = (RadioGroup)findViewById(R.id.myRadioGroup);
+        List<String> questions = myDbHelper.getQuestions();
+        RadioButton button;
+        int id = 0;
+        for(String s : questions){
+            button = new RadioButton(this);
+            button.setText(s);
+            button.setId(id);
+            id++;
+            rGroup.addView(button);
+        }
+
 
         mJoinButton = (Button)findViewById(R.id.useJoin);
         mJoinButton.setOnClickListener(new View.OnClickListener() {

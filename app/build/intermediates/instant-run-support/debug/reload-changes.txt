@@ -1,2 +1,15 @@
-CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\org\alljoyn\bus\sample\chat\UseActivity$override.class
-CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$3$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/R$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/R$mipmap$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/R$layout$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$5$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$6$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/R$string$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$2$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$7$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/DialogBuilder$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/R$id$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$4$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$1$override.class
+CHANGED,/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/org/alljoyn/bus/sample/chat/UseActivity$override.class

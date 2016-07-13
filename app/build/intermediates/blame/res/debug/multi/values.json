@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "/Users/Nana/Desktop/AMA/AMA/app/build/intermediates/res/merged/debug/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 91
                 },
                 "from": {
-                    "file": "K:\\Users\\hauke_000\\Documents\\AMA\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "/Users/Nana/Desktop/AMA/AMA/app/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
