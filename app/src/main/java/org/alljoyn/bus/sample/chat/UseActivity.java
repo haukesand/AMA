@@ -65,7 +65,7 @@ public class UseActivity extends Activity implements Observer {
         myView = (View) findViewById(R.id.my_view);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         viewFlipper.setFlipInterval(5000);
-        viewFlipper.startFlipping();
+        //viewFlipper.startFlipping();
         //viewFlipper.setDisplayedChild(1); //0 is original, 1 is blue, 2 is red
 
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
@@ -78,6 +78,7 @@ public class UseActivity extends Activity implements Observer {
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String message = view.getText().toString();
+                    //myDbHelper.addQuestion(message);
                     Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
                     mChatApplication.newLocalUserMessage(message);
                     view.setText("");
@@ -206,21 +207,7 @@ public class UseActivity extends Activity implements Observer {
     }
 
 
-//    private void flashScreen() {
-//        //channelView.setVisibility(View.GONE);
-//        hideSoftKeyboard();
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (whichColor)
-//                    myView.setBackgroundColor(Color.RED);
-//                else
-//                { myView.setBackgroundColor(Color.GREEN);
-//
-//                }
-//            }
-//        });
-//    }
+
     public void hideSoftKeyboard() {
         if(getCurrentFocus()!=null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);

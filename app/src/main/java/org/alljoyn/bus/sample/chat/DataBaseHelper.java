@@ -203,6 +203,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return questions;
     }
 
+    public void addQuestion(String s){
+        String countQuery = "INSERT INTO " + TABLE_NAME + " VALUES ( null,  \"" + s +  "\", 1, 2, 0)";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        Log.d(LOG_TAG, "Added question " + s);
+        cursor.close();
+    }
+
     // Add your public helper methods to access and get content from the database.
     // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
     // to you to create adapters for your views.
