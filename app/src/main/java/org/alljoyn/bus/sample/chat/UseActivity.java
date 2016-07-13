@@ -16,11 +16,7 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.DialogBuilder;
-
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -30,8 +26,10 @@ import android.app.Dialog;
 
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,11 +42,35 @@ import java.util.List;
 
 public class UseActivity extends Activity implements Observer {
     private static final String TAG = "chat.UseActivity";
+    //for flashing
+    final static int INTERVAL = 1000; // 1 second
+    private static View myView = null;
+    private static View channelView = null;
+    boolean whichColor = true;
+
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.use);
+
+        //for flashing
+        myView = (View) findViewById(R.id.my_view);
+        channelView = (View) findViewById(R.id.channel_view);
+        myView.setBackgroundColor(Color.RED);// set initial colour
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(INTERVAL);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    flashScreen();
+                    whichColor = !whichColor;
+                }}
+        }).start();
 
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
@@ -170,6 +192,35 @@ public class UseActivity extends Activity implements Observer {
             Message message = mHandler.obtainMessage(HANDLE_ALLJOYN_ERROR_EVENT);
             mHandler.sendMessage(message);
         }
+    }
+
+
+    private void flashScreen() {
+        //channelView.setVisibility(View.GONE);
+        hideSoftKeyboard();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (whichColor)
+                    myView.setBackgroundColor(Color.RED);
+                else
+                { myView.setBackgroundColor(Color.GREEN);
+
+                }
+            }
+        });
+    }
+    public void hideSoftKeyboard() {
+        if(getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+    }
+
+    public void showSoftKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        view.requestFocus();
+        inputMethodManager.showSoftInput(view, 0);
     }
 
     private void updateHistory() {

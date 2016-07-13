@@ -1,4 +1,2 @@
-CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\org\alljoyn\bus\sample\chat\DataBaseHelper$override.class
-CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\org\alljoyn\bus\sample\chat\ChatApplication$Module$override.class
+CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\org\alljoyn\bus\sample\chat\UseActivity$override.class
 CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,K:\Users\hauke_000\Documents\AMA\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\org\alljoyn\bus\sample\chat\ChatApplication$override.class

@@ -19,6 +19,7 @@ public final class R {
         public static final int icon=0x7f020005;
     }
     public static final class id {
+        public static final int channel_view=0x7f060017;
         public static final int errorDescription=0x7f060000;
         public static final int errorOk=0x7f060001;
         public static final int hostChannelName=0x7f060002;
@@ -34,22 +35,23 @@ public final class R {
         public static final int hostStop=0x7f060006;
         public static final int hostStopCancel=0x7f06000e;
         public static final int hostStopOk=0x7f06000d;
-        public static final int radioButton=0x7f060011;
-        public static final int radioButton2=0x7f060012;
-        public static final int radioButton3=0x7f060013;
-        public static final int radioButton4=0x7f060014;
-        public static final int radioButton5=0x7f060015;
-        public static final int scrollView=0x7f060010;
-        public static final int useChannelName=0x7f060017;
-        public static final int useChannelStatus=0x7f060018;
-        public static final int useHistoryList=0x7f060016;
-        public static final int useJoin=0x7f060019;
-        public static final int useJoinCancel=0x7f06001c;
-        public static final int useJoinChannelList=0x7f06001b;
-        public static final int useLeave=0x7f06001a;
-        public static final int useLeaveCancel=0x7f06001e;
-        public static final int useLeaveOk=0x7f06001d;
-        public static final int useMessage=0x7f06000f;
+        public static final int my_view=0x7f06000f;
+        public static final int radioButton=0x7f060012;
+        public static final int radioButton2=0x7f060013;
+        public static final int radioButton3=0x7f060014;
+        public static final int radioButton4=0x7f060015;
+        public static final int radioButton5=0x7f060016;
+        public static final int scrollView=0x7f060011;
+        public static final int useChannelName=0x7f060019;
+        public static final int useChannelStatus=0x7f06001a;
+        public static final int useHistoryList=0x7f060018;
+        public static final int useJoin=0x7f06001b;
+        public static final int useJoinCancel=0x7f06001e;
+        public static final int useJoinChannelList=0x7f06001d;
+        public static final int useLeave=0x7f06001c;
+        public static final int useLeaveCancel=0x7f060020;
+        public static final int useLeaveOk=0x7f06001f;
+        public static final int useMessage=0x7f060010;
     }
     public static final class layout {
         public static final int alljoynerrordialog=0x7f040000;
