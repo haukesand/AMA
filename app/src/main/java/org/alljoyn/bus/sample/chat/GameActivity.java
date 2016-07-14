@@ -3,6 +3,7 @@ package org.alljoyn.bus.sample.chat;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class GameActivity extends Activity{
         }
     };
 
+
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Game started");
         super.onCreate(savedInstanceState);
@@ -68,6 +70,8 @@ public class GameActivity extends Activity{
         mChatApplication.checkin();
 
         new Thread(running).start();
+
+
     }
 
     public void setWaitOthers(){
@@ -100,4 +104,26 @@ public class GameActivity extends Activity{
         text.setText(Question);
 
     }
+
+    public void startRoulette(){
+        runOnUiThread(new Runnable(){
+            public void run() {
+                rl.setBackgroundColor(Color.RED);
+                new CountDownTimer(5000, 50) {
+
+                    @Override
+                    public void onTick(long arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        rl.setBackgroundColor(Color.BLUE);
+                    }
+                }.start();
+            }
+        });
+    }
+
 }
