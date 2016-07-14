@@ -99,14 +99,24 @@ public class UseActivity extends Activity implements Observer {
             id++;
             layout.addView(button, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-            button.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    mChatApplication.newLocalUserMessage("q: " + button.);
+            button.setOnClickListener(new MyOnClickListener(String.valueOf(button.getText()), UseActivity.this){
+                @Override
+                public void onClick(View arg0) {
+                    mChatApplication.newLocalUserMessage("q: " + super.s);
                     mChatApplication.newLocalUserMessage("1");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
                 }
             });
+
+            /*button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mChatApplication.newLocalUserMessage("q: " + "sflfsdlf");
+                    mChatApplication.newLocalUserMessage("1");
+                    Intent intent = new Intent(UseActivity.this, GameActivity.class);
+                    startActivity(intent);
+                }
+            });*/
         }
 
 
