@@ -10,12 +10,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Nana on 13.07.16.
  */
 public class GameActivity extends Activity{
 
     private static final String TAG = "GameActivity";
+    private ChatApplication mChatApplication = null;
+    private List<String> history = new ArrayList<String>();
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Game started");
@@ -32,6 +37,29 @@ public class GameActivity extends Activity{
         TextView text = (TextView)findViewById(R.id.textView);
         text.setText("Wait for other Players");
 
+        mChatApplication = (ChatApplication)getApplication();
+        mChatApplication.checkin();
+
+        int readyCount = 0;
+
+        while(true) {
+            history = mChatApplication.getHistory();
+            for (String s : history){
+                if(s.equals(String.valueOf('1'))){
+                    readyCount ++;
+                    if(readyCount == 3){
+                        //start game
+                        Log.d(TAG, "all members ready");
+                        break;
+                    }
+                }
+                else{
+                    if(s.equals(String.valueOf('0'))){
+                        break;
+                    }
+                }
+            }
+        }
 
 
     }

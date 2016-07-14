@@ -81,7 +81,8 @@ public class UseActivity extends Activity implements Observer {
                     String message = view.getText().toString();
                     //myDbHelper.addQuestion(message);
                     Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
-                    mChatApplication.newLocalUserMessage(message);
+                    mChatApplication.newLocalUserMessage("q: " + message);
+                    mChatApplication.newLocalUserMessage("1");
                     view.setText("");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
@@ -110,6 +111,7 @@ public class UseActivity extends Activity implements Observer {
         mJoinButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_JOIN_ID);
+                //mChatApplication.newLocalUserMessage("r");
             }
         });
 
