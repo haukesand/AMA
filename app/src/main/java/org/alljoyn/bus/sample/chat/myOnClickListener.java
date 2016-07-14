@@ -1,5 +1,7 @@
 package org.alljoyn.bus.sample.chat;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 
 /**
@@ -8,15 +10,21 @@ import android.view.View;
 public class MyOnClickListener implements View.OnClickListener
 {
 
-    int myLovelyVariable;
-    public MyOnClickListener(int myLovelyVariable) {
-        this.myLovelyVariable = myLovelyVariable;
+    String s;
+    Context context;
+    public MyOnClickListener(String s,Context context)
+    {
+        this.s = s;
+        this.context=context;
     }
 
     @Override
-    public void onClick(View v)
-    {
-        //read your lovely variable
+    public void onClick(View arg0) {
+
+        // now finish Activity as\
+        //context.finish();
+        //  OR
+        ((Activity)context).finish();
     }
 
 };
