@@ -21,9 +21,33 @@ public class GameActivity extends Activity{
     private static final String TAG = "GameActivity";
     private ChatApplication mChatApplication = null;
     private List<String> history = new ArrayList<String>();
+    private int readyCount = 0;
     RelativeLayout rl;
     ImageView hourGlass, chosen, notChosen;
     TextView text;
+
+    private Runnable running = new Runnable(){
+        @Override
+        public void run() {
+            history = mChatApplication.getHistory();
+            for (String s : history){
+                if(s.equals(String.valueOf('1'))){
+                    readyCount ++;
+                    if(readyCount == 3){
+                        //start game
+                        Log.d(TAG, "all members ready");
+                        break;
+                    }
+                }
+                else{
+                    if(s.equals(String.valueOf('0'))){
+                        //todo
+                        break;
+                    }
+                }
+            }
+        }
+    };
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Game started");
@@ -40,30 +64,10 @@ public class GameActivity extends Activity{
         setChosen("THis is your Question?!!");
 
 
-        //do this in thread
         mChatApplication = (ChatApplication)getApplication();
         mChatApplication.checkin();
 
-        int readyCount = 0;
-
-        while(true) {
-            history = mChatApplication.getHistory();
-            for (String s : history){
-                if(s.equals(String.valueOf('1'))){
-                    readyCount ++;
-                    if(readyCount == 3){
-                        //start game
-                        Log.d(TAG, "all members ready");
-                        break;
-                    }
-                }
-                else{
-                    if(s.equals(String.valueOf('0'))){
-                        break;
-                    }
-                }
-            }
-        }
+        new Thread(running).start();
     }
 
     public void setWaitOthers(){
@@ -92,7 +96,7 @@ public class GameActivity extends Activity{
         notChosen.setVisibility(View.VISIBLE);
         chosen.setVisibility(View.INVISIBLE);
         hourGlass.setVisibility(View.INVISIBLE);
-        
+
         text.setText(Question);
 
     }
