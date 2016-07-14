@@ -54,26 +54,19 @@ public class UseActivity extends Activity implements Observer {
 
 
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
-    private ViewFlipper viewFlipper;
-    private float lastX;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.use);
 
-        //for flashing
         myView = (View) findViewById(R.id.my_view);
-        viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
-        viewFlipper.setFlipInterval(5000);
-        //viewFlipper.startFlipping();
-        //viewFlipper.setDisplayedChild(1); //0 is original, 1 is blue, 2 is red
 
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
         hlv.setAdapter(mHistoryList);
 
-        EditText messageBox = (EditText)findViewById(R.id.useMessage);
+        EditText messageBox = (EditText) findViewById(R.id.useMessage);
         messageBox.setSingleLine();
         messageBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
@@ -91,12 +84,13 @@ public class UseActivity extends Activity implements Observer {
                 return true;
             }
         });
-
+        //showSoftKeyboard(myView);
         LinearLayout layout = (LinearLayout) findViewById(R.id.button_view);
         List<String> questions = myDbHelper.getQuestions();
         Button button;
+
         int id = 0;
-        for(String s : questions){
+        for (String s : questions) {
             button = new Button(this);
             button.setText(s);
             button.setId(id);
@@ -104,10 +98,19 @@ public class UseActivity extends Activity implements Observer {
             //button.setLayoutParams(lParams);
             id++;
             layout.addView(button, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mChatApplication.newLocalUserMessage("q: " + button.);
+                    mChatApplication.newLocalUserMessage("1");
+                    Intent intent = new Intent(UseActivity.this, GameActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
 
-        mJoinButton = (Button)findViewById(R.id.useJoin);
+        mJoinButton = (Button) findViewById(R.id.useJoin);
         mJoinButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_JOIN_ID);
@@ -115,15 +118,15 @@ public class UseActivity extends Activity implements Observer {
             }
         });
 
-        mLeaveButton = (Button)findViewById(R.id.useLeave);
+        mLeaveButton = (Button) findViewById(R.id.useLeave);
         mLeaveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_LEAVE_ID);
             }
         });
 
-        mChannelName = (TextView)findViewById(R.id.useChannelName);
-        mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
+        mChannelName = (TextView) findViewById(R.id.useChannelName);
+        mChannelStatus = (TextView) findViewById(R.id.useChannelStatus);
 
         /*
          * Keep a pointer to the Android Appliation class around.  We use this
@@ -131,7 +134,7 @@ public class UseActivity extends Activity implements Observer {
          * we need to "check in" with the application so it can ensure that our
          * required services are running.
          */
-        mChatApplication = (ChatApplication)getApplication();
+        mChatApplication = (ChatApplication) getApplication();
         mChatApplication.checkin();
 
         /*
@@ -152,7 +155,7 @@ public class UseActivity extends Activity implements Observer {
 
     public void onDestroy() {
         Log.i(TAG, "onDestroy()");
-        mChatApplication = (ChatApplication)getApplication();
+        mChatApplication = (ChatApplication) getApplication();
         mChatApplication.deleteObserver(this);
         super.onDestroy();
     }
@@ -164,21 +167,18 @@ public class UseActivity extends Activity implements Observer {
     protected Dialog onCreateDialog(int id) {
         Log.i(TAG, "onCreateDialog()");
         Dialog result = null;
-        switch(id) {
-        case DIALOG_JOIN_ID:
-            {
+        switch (id) {
+            case DIALOG_JOIN_ID: {
                 DialogBuilder builder = new DialogBuilder();
                 result = builder.createUseJoinDialog(this, mChatApplication);
             }
             break;
-        case DIALOG_LEAVE_ID:
-            {
+            case DIALOG_LEAVE_ID: {
                 DialogBuilder builder = new DialogBuilder();
                 result = builder.createUseLeaveDialog(this, mChatApplication);
             }
             break;
-        case DIALOG_ALLJOYN_ERROR_ID:
-            {
+            case DIALOG_ALLJOYN_ERROR_ID: {
                 DialogBuilder builder = new DialogBuilder();
                 result = builder.createAllJoynErrorDialog(this, mChatApplication);
             }
@@ -189,7 +189,7 @@ public class UseActivity extends Activity implements Observer {
 
     public synchronized void update(Observable o, Object arg) {
         Log.i(TAG, "update(" + arg + ")");
-        String qualifier = (String)arg;
+        String qualifier = (String) arg;
 
         if (qualifier.equals(ChatApplication.APPLICATION_QUIT_EVENT)) {
             Message message = mHandler.obtainMessage(HANDLE_APPLICATION_QUIT_EVENT);
@@ -213,9 +213,8 @@ public class UseActivity extends Activity implements Observer {
     }
 
 
-
     public void hideSoftKeyboard() {
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
@@ -247,16 +246,16 @@ public class UseActivity extends Activity implements Observer {
         mChannelName.setText(name);
 
         switch (channelState) {
-        case IDLE:
-            mChannelStatus.setText("Idle");
-            mJoinButton.setEnabled(true);
-            mLeaveButton.setEnabled(false);
-            break;
-        case JOINED:
-            mChannelStatus.setText("Joined");
-            mJoinButton.setEnabled(false);
-            mLeaveButton.setEnabled(true);
-            break;
+            case IDLE:
+                mChannelStatus.setText("Idle");
+                mJoinButton.setEnabled(true);
+                mLeaveButton.setEnabled(false);
+                break;
+            case JOINED:
+                mChannelStatus.setText("Joined");
+                mJoinButton.setEnabled(false);
+                mLeaveButton.setEnabled(true);
+                break;
         }
     }
 
@@ -266,7 +265,7 @@ public class UseActivity extends Activity implements Observer {
      */
     private void alljoynError() {
         if (mChatApplication.getErrorModule() == ChatApplication.Module.GENERAL ||
-            mChatApplication.getErrorModule() == ChatApplication.Module.USE) {
+                mChatApplication.getErrorModule() == ChatApplication.Module.USE) {
             showDialog(DIALOG_ALLJOYN_ERROR_ID);
         }
     }
@@ -279,32 +278,28 @@ public class UseActivity extends Activity implements Observer {
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case HANDLE_APPLICATION_QUIT_EVENT:
-                {
+                case HANDLE_APPLICATION_QUIT_EVENT: {
                     Log.i(TAG, "mHandler.handleMessage(): HANDLE_APPLICATION_QUIT_EVENT");
                     finish();
                 }
                 break;
-            case HANDLE_HISTORY_CHANGED_EVENT:
-                {
+                case HANDLE_HISTORY_CHANGED_EVENT: {
                     Log.i(TAG, "mHandler.handleMessage(): HANDLE_HISTORY_CHANGED_EVENT");
                     updateHistory();
                     break;
                 }
-            case HANDLE_CHANNEL_STATE_CHANGED_EVENT:
-                {
+                case HANDLE_CHANNEL_STATE_CHANGED_EVENT: {
                     Log.i(TAG, "mHandler.handleMessage(): HANDLE_CHANNEL_STATE_CHANGED_EVENT");
                     updateChannelState();
                     break;
                 }
-            case HANDLE_ALLJOYN_ERROR_EVENT:
-                {
+                case HANDLE_ALLJOYN_ERROR_EVENT: {
                     Log.i(TAG, "mHandler.handleMessage(): HANDLE_ALLJOYN_ERROR_EVENT");
                     alljoynError();
                     break;
                 }
-            default:
-                break;
+                default:
+                    break;
             }
         }
     };
