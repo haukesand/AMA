@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class GameActivity extends Activity {
     private int readyCount = 0;
     RelativeLayout rl;
     ImageView hourGlass, chosen, notChosen;
+    ToggleButton toggle;
     TextView text;
     String [][] users = new String[3][2];
     private int x = 0;
@@ -34,6 +36,8 @@ public class GameActivity extends Activity {
     private int winner;
     private boolean meSet = false;
 
+private boolean meChosen = false;
+    DataBaseHelper myDbHelper = new DataBaseHelper(this);
     //todo:
     //create twodimensional array with 3 elements
     //get remote usernames (when '1' posted -> get order for user index)
@@ -145,10 +149,12 @@ public class GameActivity extends Activity {
                         mChatApplication.newLocalUserMessage("w: " + winner);
                         if (winner == myId){
                             //I got chosen!!!
+                            startRoulette();
                         }
                     }
                     if(s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId))){
                         //you got chosen!!!
+                        startRoulette();
                     }
                 }
             }
@@ -167,9 +173,9 @@ public class GameActivity extends Activity {
         hourGlass = (ImageView) findViewById(R.id.imageView3);
         notChosen = (ImageView) findViewById(R.id.imageView);
         chosen = (ImageView) findViewById(R.id.imageView2);
-
+        toggle = (ToggleButton)findViewById(R.id.toggleButton);
         //setChosen("THis is your Question?!!");
-        startRoulette();
+        setWaitOthers();
 
         mChatApplication = (ChatApplication) getApplication();
         mChatApplication.checkin();
@@ -186,6 +192,7 @@ public class GameActivity extends Activity {
         hourGlass.setVisibility(View.VISIBLE);
 
         text.setText("Wait for other Players");
+        toggle.setVisibility(View.INVISIBLE);
 
     }
 
@@ -196,8 +203,14 @@ public class GameActivity extends Activity {
         chosen.setVisibility(View.VISIBLE);
         hourGlass.setVisibility(View.INVISIBLE);
         text.setText("Answer: " + Question);
+        toggle.setVisibility(View.VISIBLE);
+        toggle.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
 
-    }
+
+            }
+        });    }
 
     public void setNotChosen(String Question) {
         rl.setBackgroundColor(Color.rgb(210, 250, 245));
@@ -207,7 +220,12 @@ public class GameActivity extends Activity {
         hourGlass.setVisibility(View.INVISIBLE);
 
         text.setText(Question);
-
+        toggle.setVisibility(View.VISIBLE);
+        toggle.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void startRoulette() {
@@ -232,8 +250,14 @@ public class GameActivity extends Activity {
                     @Override
                     public void onFinish() {
                        // TODO: So who is it? and how to get the question?
-//                        setChosen("This is your Question!");
-                        setNotChosen("Question");
+                        List<String> questions=  myDbHelper.getQuestions();
+                    if (meChosen){
+                        setChosen(questions.get(0));
+
+                    }else
+                    {
+                        setNotChosen(questions.get(0));
+                    }
                     }
                 }.start();
             }

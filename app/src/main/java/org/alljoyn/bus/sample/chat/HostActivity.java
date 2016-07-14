@@ -37,7 +37,7 @@ import android.util.Log;
 
 public class HostActivity extends Activity implements Observer {
     private static final String TAG = "chat.HostActivity";
-
+public boolean isHost = false;
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
@@ -62,6 +62,7 @@ public class HostActivity extends Activity implements Observer {
         mStartButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_START_ID);
+                isHost = true;
             }
         });
 
