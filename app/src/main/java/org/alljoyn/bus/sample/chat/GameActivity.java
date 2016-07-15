@@ -61,9 +61,12 @@ private boolean meChosen = false;
                 history = mChatApplication.getHistory();
                 for (String s : history) {
                     Log.d(TAG, s);
-                    if (s.substring(s.length()-1, s.length()).equals(String.valueOf('1'))) {
+                    String test =  s.substring(9,11);
+                    boolean bla = s.substring(s.length()-1, s.length()).equals(String.valueOf('1'));
+                    if (bla) {
                         //get remote nicknames
-                        if(s.charAt(11) == ')') {
+                        Log.d(TAG, "in first if");
+                        if(s.charAt(14) == ')') {
                             String temp = s.substring(1,10);
                             boolean isInList = false;
                             for(int i = 0; i<users.length; i++){
@@ -80,7 +83,7 @@ private boolean meChosen = false;
 
                         }
                         else{
-                            if(s.substring(1,3).equals("Me")){
+                            if(s.substring(9,11).equals("Me")){
                                 if(!meSet) {
                                     x++;
                                     meSet = true;
@@ -93,8 +96,10 @@ private boolean meChosen = false;
                             }
                         }
                     } else {
+                        Log.d(TAG, "test test");
                         if (s.substring(12,13).equals("l")) {
                             boolean inList = false;
+                            int abc = users.length;
                             for(int i = 0; i<users.length; i++){
                                 if(s.equals(users[i][1])==false){
                                     inList = true;
@@ -140,9 +145,11 @@ private boolean meChosen = false;
                             }
                         }
                     }
-                    for(int i = 0; i<users.length; i++){
-                        Log.d(TAG, "username: " + users[i][1]);
-                        Log.d(TAG, "userId: " + users[i][2]);
+                    if(users[0][1] != null && !users[0][1].isEmpty()) {
+                        for (int i = 0; i < users.length; i++) {
+                            Log.d(TAG, "username: " + users[i][1]);
+                            Log.d(TAG, "userId: " + users[i][2]);
+                        }
                     }
                     if(myId == 0) {
                         winner = new Random().nextInt(3);
@@ -152,6 +159,7 @@ private boolean meChosen = false;
                             startRoulette();
                         }
                     }
+                    boolean huehue = s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId));
                     if(s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId))){
                         //you got chosen!!!
                         startRoulette();
