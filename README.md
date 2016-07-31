@@ -1,6 +1,8 @@
 # AMA
 Get to know each other's secrets. 
+
 ![alt tag](https://raw.githubusercontent.com/haukesand/AMA/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+
 Ask Me Anonymously is a prototype for an interactive ice breaking game on your smartphone developed for the course Mobile Information Systems at the Bauhaus University Weimar. It is inspired by the paper : "Design and Evaluation of a Multi-Player Mobile Game for Icebreaking Activity"by Pradthana Jarusriboonchai, Aris Malapaschas and Thomas Olsson from the Tampere University of Technology. 
 The differences to the original idea are: 
 - Use a multi-platform serverless communication protocol: AllJoyn by the AllSeen Alliance.
