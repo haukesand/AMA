@@ -260,6 +260,35 @@ public class GameActivity extends Activity {
                         @Override
                         public void onFinish() {
                             String question = myDbHelper.getQuestionByPriority();
+                            //todo: stop flickering and show question
+
+                        }
+                    }.start();
+                }
+            });
+        }
+        else{
+            runOnUiThread(new Runnable() {
+                public void run() {
+
+                    //rl.setBackgroundColor(Color.RED);
+                    CountDownTimer start = new CountDownTimer(4000, 250) {
+                        boolean alternate = false;
+
+                        @Override
+                        public void onTick(long arg0) {
+                            if (alternate == true) {
+                                rl.setBackgroundColor(Color.rgb(244, 150, 150));
+                                alternate = false;
+                            } else {
+                                rl.setBackgroundColor(Color.BLACK);
+                                alternate = true;
+                            }
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            //todo: stop flickering
 
                         }
                     }.start();
