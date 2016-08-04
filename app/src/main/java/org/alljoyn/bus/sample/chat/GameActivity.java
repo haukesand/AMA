@@ -65,8 +65,9 @@ private boolean meChosen = false;
                     boolean bla = s.substring(s.length()-1, s.length()).equals(String.valueOf('1'));
                     if (bla) {
                         //get remote nicknames
-                        Log.d(TAG, "in first if");
-                        if(s.charAt(14) == ')') {
+                        Log.d(TAG, s + " " + s.length());
+
+                        if(s.length()>14 && s.charAt(14) == ')') {
                             String temp = s.substring(1,10);
                             boolean isInList = false;
                             for(int i = 0; i<users.length; i++){
