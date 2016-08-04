@@ -36,7 +36,7 @@ public class GameActivity extends Activity {
     private int winner;
     private boolean meSet = false;
 
-private boolean meChosen = false;
+    private boolean meChosen = false;
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
     //todo:
     //create twodimensional array with 3 elements
@@ -157,13 +157,13 @@ private boolean meChosen = false;
                         mChatApplication.newLocalUserMessage("w: " + winner);
                         if (winner == myId){
                             //I got chosen!!!
-                            startRoulette();
+                            startRoulette(true);
                         }
                     }
                     boolean huehue = s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId));
                     if(s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId))){
                         //you got chosen!!!
-                        startRoulette();
+                        startRoulette(false);
                     }
                 }
             }
@@ -237,40 +237,35 @@ private boolean meChosen = false;
         });
     }
 
-    public void startRoulette() {
-        runOnUiThread(new Runnable() {
-            public void run() {
+    public void startRoulette(boolean isMe) {
+        if (isMe) {
+            runOnUiThread(new Runnable() {
+                public void run() {
 
-                //rl.setBackgroundColor(Color.RED);
-                CountDownTimer start = new CountDownTimer(4000, 250) {
-                    boolean alternate = false;
+                    //rl.setBackgroundColor(Color.RED);
+                    CountDownTimer start = new CountDownTimer(4000, 250) {
+                        boolean alternate = false;
 
-                    @Override
-                    public void onTick(long arg0) {
-                        if (alternate == true) {
-                            rl.setBackgroundColor(Color.rgb(244, 150, 150));
-                            alternate = false;
-                        } else {
-                            rl.setBackgroundColor(Color.BLACK);
-                            alternate = true;
+                        @Override
+                        public void onTick(long arg0) {
+                            if (alternate == true) {
+                                rl.setBackgroundColor(Color.rgb(244, 150, 150));
+                                alternate = false;
+                            } else {
+                                rl.setBackgroundColor(Color.BLACK);
+                                alternate = true;
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFinish() {
-                       // TODO: So who is it? and how to get the question?
-                        List<String> questions=  myDbHelper.getQuestions();
-                    if (meChosen){
-                        setChosen(questions.get(0));
+                        @Override
+                        public void onFinish() {
+                            String question = myDbHelper.getQuestionByPriority();
 
-                    }else
-                    {
-                        setNotChosen(questions.get(0));
-                    }
-                    }
-                }.start();
-            }
-        });
+                        }
+                    }.start();
+                }
+            });
+        }
     }
 
 }

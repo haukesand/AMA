@@ -211,6 +211,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
+    public String getQuestionByPriority(){
+        String priorityQuery = "SELECT Questions FROM " + TABLE_NAME + " ORDER BY Priority DESC LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(priorityQuery, null);
+        cursor.moveToFirst();
+        String question = cursor.getString(0);
+        cursor.close();
+        return question;
+    }
+
+    public int getPriority(String s){
+        String priorityQuery = "Select Priority FROM " + TABLE_NAME + " WHERE Questions = " +  "\'" + s + "\'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(priorityQuery, null);
+        cursor.moveToFirst();
+        int priority = cursor.getInt(0);
+        cursor.close();
+        return priority;
+    }
+
+    public void updatePriority(String s){
+        int newPriority = getPriority(s) + 50;
+        String priorityQuery = "UPDATE Questions SET priority=" + newPriority +" WHERE Questions = " + "\'" + s + "\'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(priorityQuery, null);
+        cursor.close();
+
+    }
+
     // Add your public helper methods to access and get content from the database.
     // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
     // to you to create adapters for your views.

@@ -72,10 +72,11 @@ public class UseActivity extends Activity implements Observer {
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String message = view.getText().toString();
-                    //myDbHelper.addQuestion(message);
+                    myDbHelper.addQuestion(message);
                     Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
                     mChatApplication.newLocalUserMessage("q: " + message);
                     mChatApplication.newLocalUserMessage("1");
+                    myDbHelper.updatePriority(message);
                     view.setText("");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
@@ -104,6 +105,7 @@ public class UseActivity extends Activity implements Observer {
                 public void onClick(View arg0) {
                     mChatApplication.newLocalUserMessage("q: " + super.s);
                     mChatApplication.newLocalUserMessage("1");
+                    myDbHelper.updatePriority(super.s);
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
                 }
