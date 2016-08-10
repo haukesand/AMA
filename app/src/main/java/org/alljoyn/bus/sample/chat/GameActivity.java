@@ -184,6 +184,10 @@ public class GameActivity extends Activity {
         chosen = (ImageView) findViewById(R.id.imageView2);
         toggle = (ToggleButton)findViewById(R.id.toggleButton);
         //setChosen("THis is your Question?!!");
+        //// TODO: 10-Aug-16 this is the problem game activity is only launched when each player presses the button in use activity. the for loop does not work because player do not press simultaneously
+        //we either need a countdown when first player pressed button the count amount of players runs for 15 seconds. this would be a shitty solution. Or we need to cound the amount of players in useactivity and pass it to game activity and check when each respond is come in
+
+
         setWaitOthers();
 
         mChatApplication = (ChatApplication) getApplication();
@@ -249,10 +253,10 @@ public class GameActivity extends Activity {
                         @Override
                         public void onTick(long arg0) {
                             if (alternate == true) {
-                                rl.setBackgroundColor(Color.rgb(244, 150, 150));
+                                rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
                                 alternate = false;
                             } else {
-                                rl.setBackgroundColor(Color.BLACK);
+                                rl.setBackgroundColor(getResources().getColor(R.color.brightRed));
                                 alternate = true;
                             }
                         }
@@ -261,6 +265,9 @@ public class GameActivity extends Activity {
                         public void onFinish() {
                             String question = myDbHelper.getQuestionByPriority();
                             //todo: stop flickering and show question
+                            setChosen(question);
+                            rl.setBackgroundColor(getResources().getColor(R.color.brightRed));
+
 
                         }
                     }.start();
@@ -278,10 +285,10 @@ public class GameActivity extends Activity {
                         @Override
                         public void onTick(long arg0) {
                             if (alternate == true) {
-                                rl.setBackgroundColor(Color.rgb(244, 150, 150));
+                                rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
                                 alternate = false;
                             } else {
-                                rl.setBackgroundColor(Color.BLACK);
+                                rl.setBackgroundColor(getResources().getColor(R.color.brightRed));
                                 alternate = true;
                             }
                         }
@@ -289,6 +296,9 @@ public class GameActivity extends Activity {
                         @Override
                         public void onFinish() {
                             //todo: stop flickering
+                            String question = myDbHelper.getQuestionByPriority();
+                            setNotChosen(question);
+                            rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
 
                         }
                     }.start();
