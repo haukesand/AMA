@@ -37,9 +37,12 @@ import android.util.Log;
 
 public class HostActivity extends Activity implements Observer {
     private static final String TAG = "chat.HostActivity";
-public boolean isHost = false;
+    public boolean isHost = false;
+    static HostActivity INSTANCE;
+
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
+        INSTANCE = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.host);
 
@@ -61,8 +64,9 @@ public boolean isHost = false;
         mStartButton.setEnabled(false);
         mStartButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDialog(DIALOG_START_ID);
                 isHost = true;
+                Log.d(TAG, "isHost set to true");
+                showDialog(DIALOG_START_ID);
             }
         });
 
@@ -104,6 +108,14 @@ public boolean isHost = false;
                 mChatApplication.quit();
             }
         });
+    }
+
+    public static HostActivity getActivityInstance(){
+        return INSTANCE;
+    }
+
+    public boolean getHost(){
+        return this.isHost;
     }
 
     public void onDestroy() {

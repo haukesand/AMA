@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,29 +25,17 @@ public class GameActivity extends Activity {
     private static final String TAG = "GameActivity";
     private ChatApplication mChatApplication = null;
     private List<String> history = new ArrayList<String>();
-    private int readyCount = 0;
     RelativeLayout rl;
     ImageView hourGlass, chosen, notChosen;
     ToggleButton toggle;
     TextView text;
-    String [][] users = new String[3][2];
-    private int x = 0;
-    private String myName;
-    private int myId;
-    private int winner;
-    private boolean meSet = false;
+    HostActivity hostActivity = new HostActivity();
+    private boolean isHost;
+    private boolean foundWinner = false;
+    private int localId;
 
-    private boolean meChosen = false;
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
-    //todo:
-    //create twodimensional array with 3 elements
-    //get remote usernames (when '1' posted -> get order for user index)
-    //create variable "me"
-    //send remote usernames
-    //compare with other users usernames
-    //username not in own list = 'me' -> add 'me' to userlist
-    //user with index 0 does math.random -> posts result
-    //resulting index = winner
+
 
     private Runnable running = new Runnable() {
         @Override
@@ -58,114 +47,37 @@ public class GameActivity extends Activity {
                 catch (InterruptedException e){
                     e.printStackTrace();
                 }
+                //get messages
                 history = mChatApplication.getHistory();
-                for (String s : history) {
-                    Log.d(TAG, s);
-                    String test =  s.substring(9,11);
-                    boolean bla = s.substring(s.length()-1, s.length()).equals(String.valueOf('1'));
-                    if (bla) {
-                        //get remote nicknames
-                        Log.d(TAG, s + " " + s.length());
 
-                        if(s.length()>14 && s.charAt(14) == ')') {
-                            String temp = s.substring(1,10);
-                            boolean isInList = false;
-                            for(int i = 0; i<users.length; i++){
-                                if(users[i][1].equals(temp)){
-                                    isInList = true;
-                                }
-                            }
-                            if(!isInList) {
-                                users[x][1] = temp;
-                                users[x][2] = String.valueOf(x);
-                                readyCount++;
-                                x++;
-                            }
-
-                        }
-                        else{
-                            if(s.substring(9,11).equals("Me")){
-                                if(!meSet) {
-                                    x++;
-                                    meSet = true;
-                                }
-                            }
-                        }
-                        if (readyCount == 2) {
-                            for(int i = 0; i<users.length; i++){
-                                mChatApplication.newLocalUserMessage("l: " + users[i][1]);
-                            }
-                        }
-                    } else {
-                        Log.d(TAG, "test test");
-                        if (s.substring(12,13).equals("l")) {
-                            boolean inList = false;
-                            int abc = users.length;
-                            for(int i = 0; i<users.length; i++){
-                                if(s.equals(users[i][1])==false){
-                                    inList = true;
-                                }
-                            }
-                            if(!inList){
-                                users[2][1] = s.substring(16, s.length());
-                                myName = s.substring(16, s.length());
-                                if(Integer.parseInt(users[0][2]) == 0){
-                                    if(Integer.parseInt(users[1][2]) == 1){
-                                        users[2][2] = "2";
-                                        myId = 2;
-                                    }
-                                    else{
-                                        if(Integer.parseInt(users[0][2]) == 2){
-                                            users[2][2] = "1";
-                                            myId = 1;
-                                        }
-                                    }
-                                }
-                                else{
-                                    if(Integer.parseInt(users[0][2]) == 1){
-                                        if(Integer.parseInt(users[1][2]) == 0){
-                                            users[2][2] = "2";
-                                            myId = 2;
-                                        }
-                                        if(Integer.parseInt(users[1][2]) == 2){
-                                            users[2][2] = "0";
-                                            myId = 0;
-                                        }
-                                    }
-                                    else{
-                                        if(Integer.parseInt(users[1][2]) == 0){
-                                            users[2][2] = "1";
-                                            myId = 1;
-                                        }
-                                        if(Integer.parseInt(users[1][2]) == 1){
-                                            users[2][2] = "0";
-                                            myId = 1;
-                                        }
-                                    }
-                                }
-                            }
+                //todo: Change message such that it uses device id
+                //host gambles for winner
+                if(!foundWinner) {
+                    if (isHost) {
+                        int winner = new Random().nextInt(1000 - 100) + 100;
+                        Log.d(TAG,"winner: " + winner);
+                        if (winner == localId) {
+                            startRoulette(true);
+                            mChatApplication.newLocalUserMessage("win");
+                        } else {
+                            mChatApplication.newLocalUserMessage(String.valueOf(winner) + "id");
                         }
                     }
-                    if(users[0][1] != null && !users[0][1].isEmpty()) {
-                        for (int i = 0; i < users.length; i++) {
-                            Log.d(TAG, "username: " + users[i][1]);
-                            Log.d(TAG, "userId: " + users[i][2]);
-                        }
-                    }
-                    if(myId == 0) {
-                        winner = new Random().nextInt(3);
-                        mChatApplication.newLocalUserMessage("w: " + winner);
-                        if (winner == myId){
-                            //I got chosen!!!
+                }
+                for (String s : history){
+                    if(s.endsWith("id")){
+                        if(s.substring(s.length()-5,s.length()-2).equals(String.valueOf(localId))){
+                            mChatApplication.newLocalUserMessage("win");
+                            foundWinner = true;
                             startRoulette(true);
                         }
                     }
-                    boolean huehue = s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId));
-                    if(s.substring(12,13).equals("w") && s.substring(s.length()-1, s.length()).equals(String.valueOf(myId))){
-                        //you got chosen!!!
+                    if(s.endsWith("win")){
+                        foundWinner = true;
                         startRoulette(false);
                     }
                 }
+
             }
         }
     };
@@ -176,6 +88,14 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.question);
+
+        //get Host
+        isHost = HostActivity.getActivityInstance().getHost();
+        //getDeviceId
+        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.d(TAG,"android_id: " + android_id);
+        localId = Integer.parseInt(android_id.substring(1,4));
+        Log.d(TAG,"localId: " + localId);
 
         rl = (RelativeLayout) findViewById(R.id.my_rl);
         text = (TextView) findViewById(R.id.textView);
