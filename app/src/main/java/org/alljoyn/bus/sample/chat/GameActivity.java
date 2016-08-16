@@ -1,6 +1,7 @@
 package org.alljoyn.bus.sample.chat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -29,10 +30,10 @@ public class GameActivity extends Activity {
     ImageView hourGlass, chosen, notChosen;
     ToggleButton toggle;
     TextView text;
-    HostActivity hostActivity = new HostActivity();
-    private boolean isHost;
+    private boolean isHost = false;
     private boolean foundWinner = false;
     private int localId;
+    String android_id;
 
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
@@ -54,10 +55,11 @@ public class GameActivity extends Activity {
                 //host gambles for winner
                 if(!foundWinner) {
                     if (isHost) {
-                        int winner = new Random().nextInt(1000 - 100) + 100;
+                        int winner = new Random().nextInt(100 - 10) + 10;
                         Log.d(TAG,"winner: " + winner);
                         if (winner == localId) {
-                            startRoulette(true);
+                            String question = myDbHelper.getQuestionByPriority();
+                            chosen(true, question);
                             mChatApplication.newLocalUserMessage("win");
                         } else {
                             mChatApplication.newLocalUserMessage(String.valueOf(winner) + "id");
@@ -69,12 +71,13 @@ public class GameActivity extends Activity {
                         if(s.substring(s.length()-5,s.length()-2).equals(String.valueOf(localId))){
                             mChatApplication.newLocalUserMessage("win");
                             foundWinner = true;
-                            startRoulette(true);
+                            String question = myDbHelper.getQuestionByPriority();
+                            chosen(true, question);
                         }
                     }
                     if(s.endsWith("win")){
                         foundWinner = true;
-                        startRoulette(false);
+                        chosen(false, "");
                     }
                 }
 
@@ -89,14 +92,14 @@ public class GameActivity extends Activity {
 
         setContentView(R.layout.question);
 
-        //get Host
-        isHost = HostActivity.getActivityInstance().getHost();
+
         //getDeviceId
-        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.d(TAG,"android_id: " + android_id);
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.d(TAG, "android_id: " + android_id);
+
         boolean foundLocalId = false;
         int start = 1;
-        int end = 4;
+        int end = 3;
         while(!foundLocalId) {
             try {
                 localId = Integer.parseInt(android_id.substring(start, end));
@@ -109,16 +112,20 @@ public class GameActivity extends Activity {
             }
         }
 
+        //get Host
+        try {
+            isHost = HostActivity.getActivityInstance().getHost();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
         rl = (RelativeLayout) findViewById(R.id.my_rl);
         text = (TextView) findViewById(R.id.textView);
         hourGlass = (ImageView) findViewById(R.id.imageView3);
         notChosen = (ImageView) findViewById(R.id.imageView);
         chosen = (ImageView) findViewById(R.id.imageView2);
         toggle = (ToggleButton)findViewById(R.id.toggleButton);
-        //setChosen("THis is your Question?!!");
-        //// TODO: 10-Aug-16 this is the problem game activity is only launched when each player presses the button in use activity. the for loop does not work because player do not press simultaneously
-        //we either need a countdown when first player pressed button the count amount of players runs for 15 seconds. this would be a shitty solution. Or we need to cound the amount of players in useactivity and pass it to game activity and check when each respond is come in
-
 
         setWaitOthers();
 
@@ -141,6 +148,40 @@ public class GameActivity extends Activity {
 
     }
 
+    public void chosen(boolean isMe, String question){
+        if(isMe) {
+            rl.setBackgroundColor(Color.RED);
+            notChosen.setVisibility(View.INVISIBLE);
+            chosen.setVisibility(View.VISIBLE);
+            hourGlass.setVisibility(View.INVISIBLE);
+            text.setText(question);
+
+            toggle.setVisibility(View.VISIBLE);
+            toggle.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else{
+            rl.setBackgroundColor(Color.rgb(210, 250, 245));
+
+            notChosen.setVisibility(View.VISIBLE);
+            chosen.setVisibility(View.INVISIBLE);
+            hourGlass.setVisibility(View.INVISIBLE);
+
+            text.setText("Lucky one! \\n Another Player got chosen.");
+            toggle.setVisibility(View.VISIBLE);
+            toggle.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+/*
     public void setChosen(String Question) {
         rl.setBackgroundColor(Color.rgb(244, 150, 150));
 
@@ -151,7 +192,8 @@ public class GameActivity extends Activity {
         toggle.setVisibility(View.VISIBLE);
         toggle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                startActivity(intent);
 
 
             }
@@ -171,11 +213,12 @@ public class GameActivity extends Activity {
                 finish();
             }
         });
-    }
+    }*/
 
     public void startRoulette(boolean isMe) {
         if (isMe) {
-            runOnUiThread(new Runnable() {
+
+            /*runOnUiThread(new Runnable() {
                 public void run() {
 
                     //rl.setBackgroundColor(Color.RED);
@@ -195,19 +238,19 @@ public class GameActivity extends Activity {
 
                         @Override
                         public void onFinish() {
-                            String question = myDbHelper.getQuestionByPriority();
-                            //todo: stop flickering and show question
-                            setChosen(question);
                             rl.setBackgroundColor(getResources().getColor(R.color.brightRed));
+                            //String question = myDbHelper.getQuestionByPriority();
+                            //todo: stop flickering and show question
+                            setChosen("Lucky one! \n Another Player got chosen.");
 
 
                         }
                     }.start();
                 }
-            });
+            });*/
         }
         else{
-            runOnUiThread(new Runnable() {
+            /*nOnUiThread(new Runnable() {
                 public void run() {
 
                     //rl.setBackgroundColor(Color.RED);
@@ -227,15 +270,13 @@ public class GameActivity extends Activity {
 
                         @Override
                         public void onFinish() {
-                            //todo: stop flickering
+                            rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
                             String question = myDbHelper.getQuestionByPriority();
                             setNotChosen(question);
-                            rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
-
                         }
                     }.start();
                 }
-            });
+            });*/
         }
     }
 
