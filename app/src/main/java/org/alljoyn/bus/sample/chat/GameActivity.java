@@ -94,8 +94,20 @@ public class GameActivity extends Activity {
         //getDeviceId
         String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         Log.d(TAG,"android_id: " + android_id);
-        localId = Integer.parseInt(android_id.substring(1,4));
-        Log.d(TAG,"localId: " + localId);
+        boolean foundLocalId = false;
+        int start = 1;
+        int end = 4;
+        while(!foundLocalId) {
+            try {
+                localId = Integer.parseInt(android_id.substring(start, end));
+                Log.d(TAG, "localId: " + localId);
+                foundLocalId=true;
+            }
+            catch(Exception e){
+                start ++;
+                end ++;
+            }
+        }
 
         rl = (RelativeLayout) findViewById(R.id.my_rl);
         text = (TextView) findViewById(R.id.textView);
