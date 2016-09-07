@@ -3,9 +3,11 @@ package org.alljoyn.bus.sample.chat;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
+import android.test.UiThreadTest;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,28 +60,41 @@ public class GameActivity extends Activity {
                     if (isHost) {
                         int winner = new Random().nextInt(100 - 10) + 10;
                         Log.d(TAG,"winner: " + winner);
-                        if (winner == localId) {
+                        /*if (winner == localId) {
                             String question = myDbHelper.getQuestionByPriority();
                             chosen(true, question);
                             mChatApplication.newLocalUserMessage("win");
-                        } else {
+                        } else {*/
                             mChatApplication.newLocalUserMessage(String.valueOf(winner) + "id");
-                        }
+                        //}
                     }
-                }
-                for (String s : history){
+                    String s = history.get(history.size()-1);
+                    Log.d(TAG, "s: " + s);
                     if(s.endsWith("id")){
-                        if(s.substring(s.length()-5,s.length()-2).equals(String.valueOf(localId))){
+                        String randomId = s.substring(s.length()-5,s.length()-2);
+                        Log.d(TAG, "randomId: " + randomId);
+                        //String localToString = String.valueOf(localId);
+                        //Log.d(TAG, "localToString: " + localToString);
+
+                        int randId = Integer.parseInt(randomId.substring(1));
+
+                        boolean checkWin = (randId == localId);
+                        Log.d(TAG, "checkWin: " + checkWin);
+                        if(checkWin){
                             mChatApplication.newLocalUserMessage("win");
                             foundWinner = true;
                             String question = myDbHelper.getQuestionByPriority();
-                            chosen(true, question);
+                            chosen(true);
                         }
+
                     }
                     if(s.endsWith("win")){
                         foundWinner = true;
-                        chosen(false, "");
+                        chosen(false);
                     }
+                }
+                else{
+                    mChatApplication.newLocalUserMessage("win");
                 }
 
             }
@@ -149,37 +164,49 @@ public class GameActivity extends Activity {
 
     }
 
-    public void chosen(boolean isMe, String question){
+    public void chosen(boolean isMe){
         if(isMe) {
-            rl.setBackgroundColor(Color.RED);
-            notChosen.setVisibility(View.INVISIBLE);
-            chosen.setVisibility(View.VISIBLE);
-            hourGlass.setVisibility(View.INVISIBLE);
-            text.setText(question);
+            runOnUiThread(new Runnable(){
+                @Override
+                public void run(){
+                    String question = myDbHelper.getQuestionByPriority();
+                    rl.setBackgroundColor(Color.RED);
+                    notChosen.setVisibility(View.INVISIBLE);
+                    chosen.setVisibility(View.VISIBLE);
+                    hourGlass.setVisibility(View.INVISIBLE);
+                    text.setText(question);
 
-            toggle.setVisibility(View.VISIBLE);
-            toggle.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent intent = new Intent(GameActivity.this, UseActivity.class);
-                    startActivity(intent);
+                    toggle.setVisibility(View.VISIBLE);
+                    toggle.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
             });
         }
         else{
-            rl.setBackgroundColor(Color.rgb(210, 250, 245));
+            runOnUiThread(new Runnable(){
+                              @Override
+                              public void run() {
+                                  rl.setBackgroundColor(Color.rgb(210, 250, 245));
 
-            notChosen.setVisibility(View.VISIBLE);
-            chosen.setVisibility(View.INVISIBLE);
-            hourGlass.setVisibility(View.INVISIBLE);
+                                  notChosen.setVisibility(View.VISIBLE);
+                                  chosen.setVisibility(View.INVISIBLE);
+                                  hourGlass.setVisibility(View.INVISIBLE);
 
-            text.setText("Lucky one! \\n Another Player got chosen.");
-            toggle.setVisibility(View.VISIBLE);
-            toggle.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent intent = new Intent(GameActivity.this, UseActivity.class);
-                    startActivity(intent);
-                }
-            });
+                                  text.setText("Lucky one! \\n Another Player got chosen.");
+                                  toggle.setVisibility(View.VISIBLE);
+                                  toggle.setOnClickListener(new View.OnClickListener() {
+                                      public void onClick(View v) {
+                                          Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                                          startActivity(intent);
+                                      }
+                                  });
+                              }
+                          });
+
         }
     }
 /*
