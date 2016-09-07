@@ -216,7 +216,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void addQuestion(String s){
-        String countQuery = escapeChar("INSERT INTO " + TABLE_NAME + " VALUES ( null,  \"" + s +  "\", 1, 2, 0)");
+        s = escapeChar(s);
+        String countQuery = "INSERT INTO " + TABLE_NAME + " VALUES ( null,  \"" + s +  "\", 1, 2, 0)";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         Log.d(LOG_TAG, "Added question " + s);
@@ -234,7 +235,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public int getPriority(String s){
-        String priorityQuery = escapeChar("Select Priority FROM " + TABLE_NAME + " WHERE Questions = " +  "\'" + s + "\'");
+        s = escapeChar(s);
+        String priorityQuery = "Select Priority FROM " + TABLE_NAME + " WHERE Questions = " +  "\'" + s + "\'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(priorityQuery, null);
         cursor.moveToFirst();
@@ -245,7 +247,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void updatePriority(String s){
         int newPriority = getPriority(s) + 50;
-        String priorityQuery = escapeChar("UPDATE Questions SET priority=" + newPriority +" WHERE Questions = " + "\'" + s + "\'");
+        s = escapeChar(s);
+        String priorityQuery = "UPDATE Questions SET priority=" + newPriority +" WHERE Questions = " + "\'" + s + "\'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(priorityQuery, null);
         cursor.close();

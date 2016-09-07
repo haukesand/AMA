@@ -53,6 +53,7 @@ public class GameActivity extends Activity {
 
                 //todo: Change message such that it uses device id
                 //host gambles for winner
+                Log.d(TAG, "isHost: " + isHost);
                 if(!foundWinner) {
                     if (isHost) {
                         int winner = new Random().nextInt(100 - 10) + 10;
