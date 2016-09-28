@@ -59,13 +59,16 @@ public class GameActivity extends Activity {
                 Log.d(TAG, "isHost: " + isHost);
                 if(!foundWinner) {
                     String s = history.get(history.size()-1);
-                    if(s.endsWith("cq")){
-                        for(int i = 0; i<s.length(); i++){
-                            boolean getCq = s.charAt(i)==')';
-                            Log.d(TAG, "getCq: " + getCq);
-                        }
-                    }
                     if (isHost) {
+                        if(s.endsWith("cq")){
+                            for(int i = 0; i<s.length(); i++){
+                                boolean getCq = s.charAt(i)==')';
+                                if(getCq){
+                                    String temp = s.substring(i+1);
+                                    myDbHelper.addQuestion(temp);
+                                }
+                            }
+                        }
                         int winner = new Random().nextInt(100 - 10) + 10;
                         Log.d(TAG,"winner: " + winner);
                         /*if (winner == localId) {
@@ -99,7 +102,6 @@ public class GameActivity extends Activity {
                     }
                     if(s.endsWith("win")){
                         foundWinner = true;
-                        mChatApplication.clearHistory();
                         chosen(false);
                     }
                 }
