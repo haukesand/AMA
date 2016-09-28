@@ -36,6 +36,7 @@ public class GameActivity extends Activity {
     private boolean foundWinner = false;
     private int localId;
     String android_id;
+    public boolean stop = false;
 
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
@@ -43,7 +44,7 @@ public class GameActivity extends Activity {
     private Runnable running = new Runnable() {
         @Override
         public void run() {
-            while (true){
+            while (!stop){
                 try{
                     Thread.sleep(100);
                 }
@@ -57,6 +58,13 @@ public class GameActivity extends Activity {
                 //host gambles for winner
                 Log.d(TAG, "isHost: " + isHost);
                 if(!foundWinner) {
+                    String s = history.get(history.size()-1);
+                    if(s.endsWith("cq")){
+                        for(int i = 0; i<s.length(); i++){
+                            boolean getCq = s.charAt(i)==')';
+                            Log.d(TAG, "getCq: " + getCq);
+                        }
+                    }
                     if (isHost) {
                         int winner = new Random().nextInt(100 - 10) + 10;
                         Log.d(TAG,"winner: " + winner);
@@ -68,7 +76,7 @@ public class GameActivity extends Activity {
                             mChatApplication.newLocalUserMessage(String.valueOf(winner) + "id");
                         //}
                     }
-                    String s = history.get(history.size()-1);
+
                     Log.d(TAG, "s: " + s);
                     if(s.endsWith("id")){
                         String randomId = s.substring(s.length()-5,s.length()-2);
@@ -85,16 +93,19 @@ public class GameActivity extends Activity {
                             foundWinner = true;
                             String question = myDbHelper.getQuestionByPriority();
                             chosen(true);
+                            checkWin = false;
                         }
 
                     }
                     if(s.endsWith("win")){
                         foundWinner = true;
+                        mChatApplication.clearHistory();
                         chosen(false);
                     }
                 }
                 else{
                     mChatApplication.newLocalUserMessage("win");
+                    stop = true;
                 }
 
             }
@@ -179,7 +190,10 @@ public class GameActivity extends Activity {
                     toggle.setVisibility(View.VISIBLE);
                     toggle.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
+                            foundWinner = false;
+                            myDbHelper.clearDatabase();
                             Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                            //GameActivity.this.finish();
                             startActivity(intent);
                         }
                     });
@@ -200,7 +214,10 @@ public class GameActivity extends Activity {
                                   toggle.setVisibility(View.VISIBLE);
                                   toggle.setOnClickListener(new View.OnClickListener() {
                                       public void onClick(View v) {
+                                          foundWinner = false;
+                                          myDbHelper.clearDatabase();
                                           Intent intent = new Intent(GameActivity.this, UseActivity.class);
+                                          //GameActivity.this.finish();
                                           startActivity(intent);
                                       }
                                   });
