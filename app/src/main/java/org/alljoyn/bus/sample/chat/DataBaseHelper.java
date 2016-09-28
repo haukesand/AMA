@@ -173,32 +173,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<String> getQuestions(){
         List<String> questions = new ArrayList<String>();
         List<String> total = new ArrayList<String>();
-
-        String priorityQuery = "SELECT Questions FROM " + TABLE_NAME + " ORDER BY Priority DESC LIMIT 3";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(priorityQuery, null);
+
+        String totalQuery = "SELECT Questions FROM " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(totalQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                questions.add(cursor.getString(0));
+                total.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
 
-        String totalQuery = "SELECT Questions FROM " + TABLE_NAME;
-        Cursor cursor1 = db.rawQuery(totalQuery, null);
-
-        if (cursor1.moveToFirst()) {
-            do {
-                total.add(cursor1.getString(0));
-            } while (cursor1.moveToNext());
-        }
-
+        //get random questions from database
         Random rand = new Random();
-        int x = rand.nextInt(total.size());
-        int y = rand.nextInt(total.size());
-
-        questions.add(total.get(x));
-        questions.add(total.get(y));
+        for (int i = 0; i<5; i++) {
+            questions.add(total.get(rand.nextInt(total.size())));
+        }
 
         return questions;
     }
@@ -217,7 +207,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void addQuestion(String s){
         s = escapeChar(s);
-        String countQuery = "INSERT INTO " + TABLE_NAME + " VALUES ( null,  \"" + s +  "\", 1, 2, 0)";
+        String countQuery = "INSERT INTO " + TABLE_NAME + " VALUES ( null,  \"" + s +  "\", 1, 100, 0)";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         Log.d(LOG_TAG, "Added question " + s);
@@ -248,11 +238,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void updatePriority(String s){
         int newPriority = getPriority(s) + 50;
         s = escapeChar(s);
-        String priorityQuery = "UPDATE Questions SET priority=" + newPriority +" WHERE Questions = " + "\'" + s + "\'";
+        String priorityQuery = "UPDATE Questions SET Priority=" + newPriority +" WHERE Questions = " + "\'" + s + "\'";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(priorityQuery, null);
-        cursor.close();
+        db.execSQL(priorityQuery);
+        Log.d(LOG_TAG, "new priority: " + getPriority(s));
+        //Cursor cursor = db.rawQuery(priorityQuery, null);
+        //cursor.close();
 
+    }
+
+    public void clearDatabase(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //reset priority
+        String priorityQuery = "UPDATE Questions SET Priority=0 WHERE Priority>0";
+        //delete custom questions
+        String resetQuery = "DELETE From Questions WHERE UserQ_bool = 1";
+        db.execSQL(priorityQuery);
+        db.execSQL(resetQuery);
     }
 
     // Add your public helper methods to access and get content from the database.
