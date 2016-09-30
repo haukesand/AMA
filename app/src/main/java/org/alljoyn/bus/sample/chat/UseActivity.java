@@ -63,8 +63,8 @@ public class UseActivity extends Activity implements Observer {
         myView = (View) findViewById(R.id.my_view);
 
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-        ListView hlv = (ListView) findViewById(R.id.useHistoryList);
-        hlv.setAdapter(mHistoryList);
+        //ListView hlv = (ListView) findViewById(R.id.useHistoryList);
+       // hlv.setAdapter(mHistoryList);
 
         EditText messageBox = (EditText) findViewById(R.id.useMessage);
         messageBox.setSingleLine();
@@ -137,8 +137,8 @@ public class UseActivity extends Activity implements Observer {
             }
         });
 
-        mChannelName = (TextView) findViewById(R.id.useChannelName);
-        mChannelStatus = (TextView) findViewById(R.id.useChannelStatus);
+       // mChannelName = (TextView) findViewById(R.id.useChannelName);
+       // mChannelStatus = (TextView) findViewById(R.id.useChannelStatus);
 
         /*
          * Keep a pointer to the Android Appliation class around.  We use this
@@ -255,16 +255,16 @@ public class UseActivity extends Activity implements Observer {
         if (name == null) {
             name = "Not set";
         }
-        mChannelName.setText(name);
+        //mChannelName.setText(name);
 
         switch (channelState) {
             case IDLE:
-                mChannelStatus.setText("Idle");
+                //mChannelStatus.setText("Idle");
                 mJoinButton.setEnabled(true);
                 mLeaveButton.setEnabled(false);
                 break;
             case JOINED:
-                mChannelStatus.setText("Joined");
+               // mChannelStatus.setText("Joined");
                 mJoinButton.setEnabled(false);
                 mLeaveButton.setEnabled(true);
                 break;
@@ -323,7 +323,7 @@ public class UseActivity extends Activity implements Observer {
     private Button mJoinButton;
     private Button mLeaveButton;
 
-    private TextView mChannelName;
+    //private TextView mChannelName;
 
-    private TextView mChannelStatus;
+    //private TextView mChannelStatus;
 }

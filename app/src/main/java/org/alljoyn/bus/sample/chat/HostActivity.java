@@ -46,11 +46,11 @@ public class HostActivity extends Activity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.host);
 
-        mChannelName = (TextView)findViewById(R.id.hostChannelName);
-        mChannelName.setText("");
+        //mChannelName = (TextView)findViewById(R.id.hostChannelName);
+        //mChannelName.setText("");
 
-        mChannelStatus = (TextView)findViewById(R.id.hostChannelStatus);
-        mChannelStatus.setText("Idle");
+        //mChannelStatus = (TextView)findViewById(R.id.hostChannelStatus);
+        //mChannelStatus.setText("Idle");
 
         mSetNameButton = (Button)findViewById(R.id.hostSetName);
         mSetNameButton.setEnabled(true);
@@ -192,25 +192,25 @@ public class HostActivity extends Activity implements Observer {
             haveName = false;
             name = "Not set";
         }
-        mChannelName.setText(name);
+      //  mChannelName.setText(name);
         switch (channelState) {
         case IDLE:
-            mChannelStatus.setText("Idle");
+            //mChannelStatus.setText("Idle");
             break;
         case NAMED:
-            mChannelStatus.setText("Named");
+           // mChannelStatus.setText("Named");
             break;
         case BOUND:
-            mChannelStatus.setText("Bound");
+           // mChannelStatus.setText("Bound");
             break;
         case ADVERTISED:
-            mChannelStatus.setText("Advertised");
+          //  mChannelStatus.setText("Advertised");
             break;
         case CONNECTED:
-            mChannelStatus.setText("Connected");
+         //   mChannelStatus.setText("Connected");
             break;
         default:
-            mChannelStatus.setText("Unknown");
+          //  mChannelStatus.setText("Unknown");
             break;
         }
 
@@ -229,8 +229,8 @@ public class HostActivity extends Activity implements Observer {
         }
     }
 
-    private TextView mChannelName;
-    private TextView mChannelStatus;
+    //private TextView mChannelName;
+    //private TextView mChannelStatus;
     private Button mSetNameButton;
     private Button mStartButton;
     private Button mStopButton;
