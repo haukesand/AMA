@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
 
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,9 +53,8 @@ public class UseActivity extends Activity implements Observer {
     //for flashing
     private static View myView = null;
 
-    private boolean isHost = false;
-
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
+    private DialogBuilder builderHost = new DialogBuilder();
 
     public static final int DIALOG_JOIN_ID = 0;
     public static final int DIALOG_LEAVE_ID = 1;
@@ -63,9 +63,15 @@ public class UseActivity extends Activity implements Observer {
     static final int DIALOG_STOP_ID = 4;
 
     private TextView mChannelName;
+    private String localId;
+
+    public boolean isHost = false;
+
+    static UseActivity INSTANCE;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
+        INSTANCE = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.use);
 
@@ -75,12 +81,24 @@ public class UseActivity extends Activity implements Observer {
         //ListView hlv = (ListView) findViewById(R.id.useHistoryList);
        // hlv.setAdapter(mHistoryList);
 
-        //get Host
-        try {
-            isHost = HostActivity.getActivityInstance().getHost();
-            } catch (Exception e) {
-                e.printStackTrace();
+        //getDeviceId
+        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.d(TAG, "android_id: " + android_id);
+
+        boolean foundLocalId = false;
+        int start = 1;
+        int end = 3;
+        while(!foundLocalId) {
+            try {
+                localId = android_id.substring(start, end);
+                Log.d(TAG, "localId: " + localId);
+                foundLocalId=true;
             }
+            catch(Exception e){
+                start ++;
+                end ++;
+            }
+        }
 
         EditText messageBox = (EditText) findViewById(R.id.useMessage);
         messageBox.setSingleLine();
@@ -120,7 +138,7 @@ public class UseActivity extends Activity implements Observer {
                 public void onClick(View arg0) {
 
                     myDbHelper.updatePriority(super.s);
-                    mChatApplication.newLocalUserMessage(super.s);
+                    mChatApplication.newLocalUserMessage(super.s + localId + "dq");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
                     finish();
@@ -198,8 +216,7 @@ public class UseActivity extends Activity implements Observer {
             }
             break;
             case DIALOG_SET_NAME_ID: {
-                DialogBuilder builder = new DialogBuilder();
-                result = builder.createHostNameDialog(this, mChatApplication);
+                result = builderHost.createHostNameDialog(this, mChatApplication);
                 }
             break;
             case DIALOG_STOP_ID: {
@@ -286,12 +303,23 @@ public class UseActivity extends Activity implements Observer {
                 mLeaveButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         showDialog(DIALOG_SET_NAME_ID);
+                        isHost = true;
                     }
                 });
                 break;
             case JOINED:
                // mChannelStatus.setText("Joined");
                 mChannelName.setText(name);
+                //get Host
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    isHost = extras.getBoolean("isHost");
+                    //The key argument here must match that used in the other activity
+                }
+                else {
+                    isHost = builderHost.getHost();
+                }
+                Log.d(TAG, "isHost: " + isHost);
                 if(!isHost) {
                     mJoinButton.setEnabled(false);
                 }
@@ -361,6 +389,14 @@ public class UseActivity extends Activity implements Observer {
         }
     };
 
+    public static UseActivity getActivityInstance(){
+        return INSTANCE;
+    }
+
+    public boolean getHost(){
+        return this.isHost;
+    }
+
     private ChatApplication mChatApplication = null;
 
     private ArrayAdapter<String> mHistoryList;
@@ -373,8 +409,6 @@ public class UseActivity extends Activity implements Observer {
     {
         mChatApplication.quit();
     }
-
-
 
     //private TextView mChannelStatus;
 }

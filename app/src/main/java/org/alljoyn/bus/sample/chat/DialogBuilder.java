@@ -17,6 +17,7 @@
 package org.alljoyn.bus.sample.chat;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Dialog;
 
 import android.view.KeyEvent;
@@ -34,8 +35,9 @@ import android.util.Log;
 
 import java.util.List;
 
-public class DialogBuilder {
+public class DialogBuilder{
     private static final String TAG = "chat.Dialogs";
+    public boolean isHost;
 
     public Dialog createUseJoinDialog(final Activity activity, final ChatApplication application) {
         Log.i(TAG, "createUseJoinDialog()");
@@ -129,6 +131,7 @@ public class DialogBuilder {
                     application.hostStartChannel();
                     application.useSetChannelName(name);
                     application.useJoinChannel();
+                    isHost = true;
                     dialog.cancel();
                 }
                 return true;
@@ -144,6 +147,7 @@ public class DialogBuilder {
                 application.hostStartChannel();
                 application.useSetChannelName(name);
                 application.useJoinChannel();
+                isHost = true;
                 dialog.cancel();
             }
         });
@@ -223,5 +227,9 @@ public class DialogBuilder {
         });
 
         return dialog;
+    }
+
+    public boolean getHost(){
+        return this.isHost;
     }
 }
