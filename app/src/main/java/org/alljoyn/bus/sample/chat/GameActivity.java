@@ -11,6 +11,8 @@ import android.test.UiThreadTest;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class GameActivity extends Activity {
     RelativeLayout rl;
     ImageView hourGlass, chosen, notChosen;
     ToggleButton toggle;
-    TextView text;
+    TextView text, textP;
     private boolean isHost = false;
     private boolean foundWinner = false;
     private int localId;
@@ -170,7 +172,8 @@ public class GameActivity extends Activity {
 
 
         rl = (RelativeLayout) findViewById(R.id.my_rl);
-        text = (TextView) findViewById(R.id.textView);
+        text = (TextView) findViewById(R.id.questionT);
+        textP = (TextView) findViewById(R.id.playerT);
         hourGlass = (ImageView) findViewById(R.id.imageView3);
         notChosen = (ImageView) findViewById(R.id.imageView);
         chosen = (ImageView) findViewById(R.id.imageView2);
@@ -187,12 +190,19 @@ public class GameActivity extends Activity {
     }
 
     public void setWaitOthers() {
-        rl.setBackgroundColor(Color.rgb(210, 250, 245));
+
+        RotateAnimation r;
+        r = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        r.setDuration((long) 2*1000);
+        r.setRepeatCount(25);
+        hourGlass.startAnimation(r);
+
+        rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
         notChosen.setVisibility(View.INVISIBLE);
         chosen.setVisibility(View.INVISIBLE);
         hourGlass.setVisibility(View.VISIBLE);
 
-        text.setText("Wait for other Players");
+        text.setText("Picking Player!");
         toggle.setVisibility(View.INVISIBLE);
 
     }
@@ -203,10 +213,11 @@ public class GameActivity extends Activity {
                 @Override
                 public void run(){
                     String question = myDbHelper.getQuestionByPriority();
-                    rl.setBackgroundColor(Color.RED);
+                    rl.setBackgroundColor(getResources().getColor(R.color.brightRed));
                     notChosen.setVisibility(View.INVISIBLE);
                     chosen.setVisibility(View.VISIBLE);
                     hourGlass.setVisibility(View.INVISIBLE);
+                    textP.setText("Answer This:");
                     text.setText(question);
 
                     toggle.setVisibility(View.VISIBLE);
@@ -228,13 +239,14 @@ public class GameActivity extends Activity {
             runOnUiThread(new Runnable(){
                               @Override
                               public void run() {
-                                  rl.setBackgroundColor(Color.rgb(210, 250, 245));
+                                  rl.setBackgroundColor(getResources().getColor(R.color.brightBlue));
 
                                   notChosen.setVisibility(View.VISIBLE);
                                   chosen.setVisibility(View.INVISIBLE);
                                   hourGlass.setVisibility(View.INVISIBLE);
 
-                                  text.setText("Lucky one! \\n Another Player got chosen.");
+                                  text.setText("Somebody else has to answer:");
+                                  textP.setText("");
                                   toggle.setVisibility(View.VISIBLE);
                                   toggle.setOnClickListener(new View.OnClickListener() {
                                       public void onClick(View v) {
