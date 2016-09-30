@@ -40,6 +40,7 @@ public class GameActivity extends Activity {
     String android_id;
     public boolean stop = false;
     private List<String> askedIds = new ArrayList<String>();
+    private int counter = 0;
 
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
@@ -62,34 +63,32 @@ public class GameActivity extends Activity {
                 Log.d(TAG, "isHost: " + isHost);
                 if(!foundWinner) {
                     String s = history.get(history.size()-1);
-                    if (isHost) {
-                        if(s.endsWith("cq")){
-                            for(int i = 0; i<s.length(); i++){
-                                boolean getCq = s.charAt(i)==')';
-                                if(getCq){
-                                    String temp = s.substring(i+1, s.length()-2);
-                                    myDbHelper.addQuestion(temp);
-                                }
+                    if(s.endsWith("cq")){
+                        for(int i = 0; i<s.length(); i++){
+                            boolean getCq = s.charAt(i)==')';
+                            if(getCq){
+                                String temp = s.substring(i+1, s.length()-2);
+                                myDbHelper.addQuestion(temp);
                             }
                         }
-                        if(s.endsWith("dq")){
-                            String remoteId = s.substring(s.length()-4, s.length()-2);
-                            if(remoteId.equals(String.valueOf(localId))==false) {
-                                for (String str : askedIds) {
-                                    if (str.contains(remoteId) == false) {
-                                        askedIds.add(remoteId);
-                                        for(int i = 0; i<s.length(); i++){
-                                            boolean getDq = s.charAt(i)==')';
-                                            if(getDq){
-                                                String temp = s.substring(i+1, s.length()-4);
-                                                myDbHelper.updatePriority(temp);
-                                            }
+                    }
+                    if(s.endsWith("dq")){
+                        String remoteId = s.substring(s.length()-4, s.length()-2);
+                        if(remoteId.equals(String.valueOf(localId))==false) {
+                                if (askedIds.contains(remoteId) == false) {
+                                    askedIds.add(remoteId);
+                                    for(int i = 0; i<s.length(); i++){
+                                        boolean getDq = s.charAt(i)==')';
+                                        if(getDq){
+                                            String temp = s.substring(i+1, s.length()-4);
+                                            myDbHelper.updatePriority(temp.trim());
                                         }
                                     }
                                 }
-                            }
-
                         }
+
+                    }
+                    if (isHost) {
                         int winner = new Random().nextInt(100 - 10) + 10;
                         Log.d(TAG,"winner: " + winner);
                         /*if (winner == localId) {
@@ -124,6 +123,20 @@ public class GameActivity extends Activity {
                     if(s.endsWith("win")){
                         foundWinner = true;
                         chosen(false);
+                    }
+                    Bundle extras = getIntent().getExtras();
+                    if (extras != null) {
+                        String value = extras.getString("newMessage");
+                        Log.d(TAG, "value: " +  value);
+                        if(counter == 5) {
+                            mChatApplication.newLocalUserMessage(value);
+                            counter = 0;
+                        }
+                        else{
+                            counter++;
+                        }
+                        Log.d(TAG, value);
+                        //The key argument here must match that used in the other activity
                     }
                 }
                 else{
@@ -216,6 +229,7 @@ public class GameActivity extends Activity {
                     rl.setBackgroundColor(getResources().getColor(R.color.brightRed));
                     notChosen.setVisibility(View.INVISIBLE);
                     chosen.setVisibility(View.VISIBLE);
+                    hourGlass.clearAnimation();
                     hourGlass.setVisibility(View.INVISIBLE);
                     textP.setText("Answer This:");
                     text.setText(question);
@@ -243,9 +257,10 @@ public class GameActivity extends Activity {
 
                                   notChosen.setVisibility(View.VISIBLE);
                                   chosen.setVisibility(View.INVISIBLE);
+                                  hourGlass.clearAnimation();
                                   hourGlass.setVisibility(View.INVISIBLE);
 
-                                  text.setText("Somebody else has to answer:");
+                                  text.setText("Somebody else has to answer!");
                                   textP.setText("");
                                   toggle.setVisibility(View.VISIBLE);
                                   toggle.setOnClickListener(new View.OnClickListener() {

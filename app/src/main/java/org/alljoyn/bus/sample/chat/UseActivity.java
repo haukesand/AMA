@@ -90,6 +90,8 @@ public class UseActivity extends Activity implements Observer {
         int end = 3;
         while(!foundLocalId) {
             try {
+                //check if localid is a number. if yes, safe.
+                int temp = Integer.parseInt(android_id.substring(start, end));
                 localId = android_id.substring(start, end);
                 Log.d(TAG, "localId: " + localId);
                 foundLocalId=true;
@@ -110,8 +112,10 @@ public class UseActivity extends Activity implements Observer {
                     Log.i(TAG, message);
                     mChatApplication.newLocalUserMessage(message + "cq");
                     //myDbHelper.updatePriority(message);
+                    String newMessage = message + "cq";
                     view.setText("");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
+                    intent.putExtra("newMessage", newMessage);
                     startActivity(intent);
                     finish();
                 }
@@ -140,6 +144,8 @@ public class UseActivity extends Activity implements Observer {
                     myDbHelper.updatePriority(super.s);
                     mChatApplication.newLocalUserMessage(super.s + localId + "dq");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
+                    String newMessage = super.s + localId + "dq";
+                    intent.putExtra("newMessage", newMessage);
                     startActivity(intent);
                     finish();
                 }
