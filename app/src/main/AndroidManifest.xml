@@ -17,17 +17,6 @@
         android:name=".ChatApplication">
 
         <activity
-            android:name=".TabWidget"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".HostActivity"
             android:windowSoftInputMode="adjustResize"
             android:label="Settings">
@@ -35,8 +24,12 @@
 
         <activity
             android:name=".UseActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:label="Ask Me Anonymously">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity

@@ -131,11 +131,6 @@ public class UseActivity extends Activity implements Observer {
         });
 
         mLeaveButton = (Button) findViewById(R.id.useLeave);
-        mLeaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_LEAVE_ID);
-            }
-        });
 
        // mChannelName = (TextView) findViewById(R.id.useChannelName);
        // mChannelStatus = (TextView) findViewById(R.id.useChannelStatus);
@@ -261,12 +256,25 @@ public class UseActivity extends Activity implements Observer {
             case IDLE:
                 //mChannelStatus.setText("Idle");
                 mJoinButton.setEnabled(true);
-                mLeaveButton.setEnabled(false);
+                mLeaveButton.setEnabled(true);
+                mLeaveButton.setText("Create Channel");
+                mLeaveButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(UseActivity.this, HostActivity.class);
+                        startActivity(intent);
+                    }
+                });
                 break;
             case JOINED:
                // mChannelStatus.setText("Joined");
                 mJoinButton.setEnabled(false);
                 mLeaveButton.setEnabled(true);
+                mLeaveButton.setText("Leave Channel");
+                mLeaveButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        showDialog(DIALOG_LEAVE_ID);
+                    }
+                });
                 break;
         }
     }
