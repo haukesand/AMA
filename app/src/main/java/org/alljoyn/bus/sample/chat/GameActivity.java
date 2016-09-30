@@ -197,6 +197,7 @@ public class GameActivity extends Activity {
                             Intent intent = new Intent(GameActivity.this, UseActivity.class);
                             //GameActivity.this.finish();
                             startActivity(intent);
+                            finish();
                         }
                     });
                 }
@@ -221,6 +222,7 @@ public class GameActivity extends Activity {
                                           Intent intent = new Intent(GameActivity.this, UseActivity.class);
                                           //GameActivity.this.finish();
                                           startActivity(intent);
+                                          finish();
                                       }
                                   });
                               }

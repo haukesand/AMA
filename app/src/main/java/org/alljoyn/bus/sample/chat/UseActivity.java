@@ -79,7 +79,7 @@ public class UseActivity extends Activity implements Observer {
                     view.setText("");
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
-
+                    finish();
                 }
                 return true;
             }
@@ -107,6 +107,7 @@ public class UseActivity extends Activity implements Observer {
                     mChatApplication.newLocalUserMessage(super.s);
                     Intent intent = new Intent(UseActivity.this, GameActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
 
