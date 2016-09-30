@@ -16,7 +16,6 @@
 package org.alljoyn.bus.sample.chat;
 
 import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.TabWidget;
 import org.alljoyn.bus.sample.chat.Observable;
 import org.alljoyn.bus.sample.chat.Observer;
 import org.alljoyn.bus.sample.chat.ChatInterface;
@@ -76,7 +75,7 @@ public class AllJoynService extends Service implements Observer {
 
         CharSequence title = "AllJoyn";
         CharSequence message = "Chat Channel Hosting Service.";
-        Intent intent = new Intent(this, TabWidget.class);
+        Intent intent = new Intent(this, UseActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         Notification notification = new Notification(R.drawable.icon, null, System.currentTimeMillis());
         notification.setLatestEventInfo(this, title, message, pendingIntent);

@@ -126,6 +126,9 @@ public class DialogBuilder {
                     String name = view.getText().toString();
                     application.hostSetChannelName(name);
                     application.hostInitChannel();
+                    application.hostStartChannel();
+                    application.useSetChannelName(name);
+                    application.useJoinChannel();
                     dialog.cancel();
                 }
                 return true;
@@ -138,6 +141,9 @@ public class DialogBuilder {
                 String name = channel.getText().toString();
                 application.hostSetChannelName(name);
                 application.hostInitChannel();
+                application.hostStartChannel();
+                application.useSetChannelName(name);
+                application.useJoinChannel();
                 dialog.cancel();
             }
         });

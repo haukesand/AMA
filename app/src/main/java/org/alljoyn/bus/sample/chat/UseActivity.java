@@ -52,8 +52,15 @@ public class UseActivity extends Activity implements Observer {
     //for flashing
     private static View myView = null;
 
+    private boolean isHost = false;
 
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
+
+    public static final int DIALOG_JOIN_ID = 0;
+    public static final int DIALOG_LEAVE_ID = 1;
+    public static final int DIALOG_ALLJOYN_ERROR_ID = 2;
+    static final int DIALOG_SET_NAME_ID = 3;
+    static final int DIALOG_STOP_ID = 4;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
@@ -65,6 +72,13 @@ public class UseActivity extends Activity implements Observer {
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
         //ListView hlv = (ListView) findViewById(R.id.useHistoryList);
        // hlv.setAdapter(mHistoryList);
+
+        //get Host
+        try {
+            isHost = HostActivity.getActivityInstance().getHost();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         EditText messageBox = (EditText) findViewById(R.id.useMessage);
         messageBox.setSingleLine();
@@ -123,12 +137,7 @@ public class UseActivity extends Activity implements Observer {
 
 
         mJoinButton = (Button) findViewById(R.id.useJoin);
-        mJoinButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_JOIN_ID);
-                //mChatApplication.newLocalUserMessage("r");
-            }
-        });
+
 
         mLeaveButton = (Button) findViewById(R.id.useLeave);
 
@@ -167,10 +176,6 @@ public class UseActivity extends Activity implements Observer {
         super.onDestroy();
     }
 
-    public static final int DIALOG_JOIN_ID = 0;
-    public static final int DIALOG_LEAVE_ID = 1;
-    public static final int DIALOG_ALLJOYN_ERROR_ID = 2;
-
     protected Dialog onCreateDialog(int id) {
         Log.i(TAG, "onCreateDialog()");
         Dialog result = null;
@@ -190,6 +195,17 @@ public class UseActivity extends Activity implements Observer {
                 result = builder.createAllJoynErrorDialog(this, mChatApplication);
             }
             break;
+            case DIALOG_SET_NAME_ID: {
+                DialogBuilder builder = new DialogBuilder();
+                result = builder.createHostNameDialog(this, mChatApplication);
+                }
+            break;
+            case DIALOG_STOP_ID: {
+                DialogBuilder builder = new DialogBuilder();
+                result = builder.createHostStopDialog(this, mChatApplication);
+                }
+            break;
+
         }
         return result;
     }
@@ -256,18 +272,36 @@ public class UseActivity extends Activity implements Observer {
             case IDLE:
                 //mChannelStatus.setText("Idle");
                 mJoinButton.setEnabled(true);
+                mJoinButton.setText("Join Channel");
+                mJoinButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        showDialog(DIALOG_JOIN_ID);
+                        //mChatApplication.newLocalUserMessage("r");
+                    }
+                });
                 mLeaveButton.setEnabled(true);
                 mLeaveButton.setText("Create Channel");
                 mLeaveButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(UseActivity.this, HostActivity.class);
-                        startActivity(intent);
+                        showDialog(DIALOG_SET_NAME_ID);
                     }
                 });
                 break;
             case JOINED:
                // mChannelStatus.setText("Joined");
-                mJoinButton.setEnabled(false);
+                if(!isHost) {
+                    mJoinButton.setEnabled(false);
+                }
+                else{
+                    mJoinButton.setText("Stop Channel");
+                    mJoinButton.setOnClickListener(
+                            new View.OnClickListener(){
+                                public void onClick(View view){
+                                    showDialog(DIALOG_STOP_ID);
+                                }
+                            }
+                    );
+                }
                 mLeaveButton.setEnabled(true);
                 mLeaveButton.setText("Leave Channel");
                 mLeaveButton.setOnClickListener(new View.OnClickListener() {
