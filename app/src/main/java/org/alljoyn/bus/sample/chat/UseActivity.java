@@ -62,6 +62,8 @@ public class UseActivity extends Activity implements Observer {
     static final int DIALOG_SET_NAME_ID = 3;
     static final int DIALOG_STOP_ID = 4;
 
+    private TextView mChannelName;
+
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
@@ -141,7 +143,7 @@ public class UseActivity extends Activity implements Observer {
 
         mLeaveButton = (Button) findViewById(R.id.useLeave);
 
-       // mChannelName = (TextView) findViewById(R.id.useChannelName);
+       mChannelName = (TextView) findViewById(R.id.useChannelName);
        // mChannelStatus = (TextView) findViewById(R.id.useChannelStatus);
 
         /*
@@ -266,7 +268,7 @@ public class UseActivity extends Activity implements Observer {
         if (name == null) {
             name = "Not set";
         }
-        //mChannelName.setText(name);
+
 
         switch (channelState) {
             case IDLE:
@@ -289,6 +291,7 @@ public class UseActivity extends Activity implements Observer {
                 break;
             case JOINED:
                // mChannelStatus.setText("Joined");
+                mChannelName.setText(name);
                 if(!isHost) {
                     mJoinButton.setEnabled(false);
                 }
@@ -371,7 +374,7 @@ public class UseActivity extends Activity implements Observer {
         mChatApplication.quit();
     }
 
-    //private TextView mChannelName;
+
 
     //private TextView mChannelStatus;
 }
