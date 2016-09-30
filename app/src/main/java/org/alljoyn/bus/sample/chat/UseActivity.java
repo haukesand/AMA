@@ -323,6 +323,12 @@ public class UseActivity extends Activity implements Observer {
     private Button mJoinButton;
     private Button mLeaveButton;
 
+    @Override
+    public void onBackPressed()
+    {
+        mChatApplication.quit();
+    }
+
     //private TextView mChannelName;
 
     //private TextView mChannelStatus;
